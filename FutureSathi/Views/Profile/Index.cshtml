@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/ChildLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        Getuser();
+        alert;
+
+    });
+
+    function Getuser() {
+
+        $.ajax({
+
+            "url": "https://localhost:44352/Profile/GetUser",
+            "Method": "get",
+            success: function (respo)
+            {
+                console.log(respo.ReturnMessage);
+                var user = respo.Message;
+                var wishlist = respo.ReturnMessage;
+                var smoke;
+                var Drink;
+                console.log(user.Smoke_id);
+                if (user.Smoke_id==null) {
+                    smoke = "null";
+                }
+
+                if (user.Drink_id==null) {
+                    Drink = "null";
+                }
+
+                $("#profile").append("<div class='container d-flex justify-content-center'><div class='col-4 pt-3 pb-3 rounded-circle'><div class='d-flex justify-content-center'><img src='/Images/Profile/1.jpg' class='w-50 rounded-circle'></div></div></div>@*about myself*@<div class='container border rounded-4 mb-4  p-3'><h3 class='pb-3'>About MySelf</h3><div><span>" + user.Bio + "</span></div></div>@*personal details*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>"+user.Age+"</td></tr><tr><th>Height</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>MobileNo</th><td>value</td><tr><th>Email</th><td>value</td></tr><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td> </tr><tr><th>Family</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>-@*partnerwishlist*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + wishlist.Agee + "</td></tr><tr><th>Religion</th><td>" + wishlist.Religion + "</td><tr><th>Marrital status</th><td>" + wishlist.Marital_Status + "</td><tr><th>Education</th><td>" + wishlist.Education + "</td><tr><th>Profession</th><td>" + wishlist.Profession + "</td></tr><tr><th>Income</th><td>" + wishlist.Income + "</td><tr><th>Diet</th><td>" + wishlist.Diet + "</td></tr><tr><th>Complextion</th><td>" + wishlist.Comlextion + "</td> </tr><tr><th>Height</th><td>" + wishlist.Height + "</td></tr><tr><th>City</th><td>" + "na" + "</td></tr><tr><th>Body Type</th><td>" + wishlist.Body_Type + "</td></tr><tr><th>State</th><td>" + wishlist.State + "</td></tr></tbody></table></div>@*cards*@<div class='container p-3  d-flex justify-content-evenly'><div class='border rounded-4 d-flex justify-content-center'><div><img src='/Images/Food.jpg' class='w-100' /><h6 class='text-center'>Non-veg/Veg</h6><h6 class='text-center pt-2 text-success'>" + user.Diet + "</span></div></div><div class=' border rounded-4 d-flex justify-content-center '><div><img src='/Images/Drink2.jpg' class='w-100'/><h6 class='text-center text-success pt-3'>"+Drink+"</h6></div></div><div class=' border rounded-4 d-flex justify-content-center '><div><img src='/Images/Smoke.jpg'class='w-100'/><h6 class='text-center'>Smoke</h6><h6 class='text-center text-success'>" + smoke+"</h6></div></div><div class='border rounded-4 d-flex justify-content-center '><div><img src='/Images/gym2.jpg' class='w-100' /><h6 class='text-center'>BodyType</h6><h6 class='text-center pt-2 text-success'>"+user.body+"</h6></div></div></div>")
+                console.log(respo.ReturnMessage)
+
+            },
+            error: function () {
+
+            }
+
+
+
+        });
+    }
+
+
+</script>
+<h2></h2>
+
+@*profile*@
+<!--<div class="container d-flex justify-content-center "><div class="col-4 pt-3 pb-3 rounded-circle  "><div class="d-flex justify-content-center"><img src="~/Images/Profile/1.jpg" class="w-50 rounded-circle"></div></div></div>-->@*about myself*@<!--<div class="container border rounded-4 mb-4  p-3 "><h3 class="pb-3">About MySelf</h3><div><span>fjfakakfdkadkffjffkdkaallafjjgkdlslall</span></div></div>-->
+@*personal details*@
+<!--<div class="container pt-3 border rounded-4  mb-4"><div class="col-12  "><div class=""><h3 class="pb-3">Personal Details</h3><label class="form-label">Age :</label><span>23</span><br /><label class="form-label">Height :</label><span>23</span><br /><label class="form-label">Marrital Status :</label><span>23</span><br /><label class="form-label">Mobile No :</label><span>23</span><br /><label class="form-label">Email:</label><span>23</span><br /><label class="form-label">Education :</label><span>23</span><br /><label class="form-label">Profession :</label><span>23</span><br /><label class="form-label">Income :</label><span>23</span><br /><label class="form-label">Family :</label><span>23</span><br /><label class="form-label">City :</label><span>23</span><br /><label class="form-label">State :</label><span>23</span><br /></div> </div>  </div>--
+>@*partnerwishlist*@<!--<div class="container  border rounded-4 pt-3 pb-3 mb-3"><h3 class="pb-4 text-center"> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>value</td></tr><tr><th>Religion</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td><tr><th>Diet</th><td>value</td></tr><tr><th>Complextion</th><td>value</td> </tr><tr><th>Height</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>Body Type</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>--
+
+>@*cards*@<!--<div class="container p-3  d-flex justify-content-evenly"><div class=" border rounded-4 d-flex justify-content- center  "><div><img src="~/Images/Food.jpg " class="w-100" /><h6 class="text-center">Non-veg/Veg</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/Drink2.jpg" class="w-100" /><h6 class="text-center">Drink</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/Smoke.jpg" class="w-100" /><h6 class="text-center">Smoke</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/gym2.jpg" class="w-100" /><h6 class="text-center">BodyType</h6><span></span></div></div></div>-->
+>@*partnerwishlist*@
+@*<div class="container  border rounded-4 pt-3 pb-3 mb-3"><h3 class="pb-4 text-center"> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>value</td></tr><tr><th>Height</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>MobileNo</th><td>value</td><tr><th>Email</th><td>value</td></tr><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td> </tr><tr><th>Family</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>--*@
+
+
+
+<div  class="container" id="profile"></div>
