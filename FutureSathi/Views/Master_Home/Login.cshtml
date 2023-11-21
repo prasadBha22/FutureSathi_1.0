@@ -1,9 +1,28 @@
-﻿@model FutureSathi.Models.UserClass
+﻿@using System.Web.Optimization;
+@model FutureSathi.Models.UserClass
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/Master_Layout.cshtml";
+
 }
+
+@Styles.Render("~/AllCSS")
+@Scripts.Render("~/ALLJQ")
+
+<link href="~/CSS/style.css" rel="stylesheet" />
+<link href="~/CSS/bootstrap-icons.min.css" rel="stylesheet" />
+<link href="~/CSS/animate.min.css" rel="stylesheet" />
+<link href="~/CSS/bootstrap-icons.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+
+<script src="~/JS/js_bootstrap.bundle.min.js"></script>
+<script src="~/JS/code.jquery.com_jquery-3.7.1.min.js"></script>
+
 
 
 <div class="container-fluid pt-5 mb-5">
@@ -47,7 +66,7 @@
                             <input type="submit" value="Login" style="background-color: #FF666D; color: white; font-weight: bold" class="btn w-100" />
                         </div>
                     </div>
-                    
+
                 </div>
                 <wbr />
             }
@@ -57,5 +76,9 @@
 
     </div>
 </div>
-           
+
+
+
+
+
 
