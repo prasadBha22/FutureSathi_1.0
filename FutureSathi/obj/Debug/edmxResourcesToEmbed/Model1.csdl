@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FutureSathiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblAge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblAge1" FromRole="tblAge" ToRole="tblUser" />
+    <NavigationProperty Name="tblWishLists" Relationship="Self.FK_tblWishList_tblAge" FromRole="tblAge" ToRole="tblWishList" />
+  </EntityType>
+  <EntityType Name="tblBodyType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblBodyType" FromRole="tblBodyType" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblChat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sender_id" Type="Int32" />
+    <Property Name="Reciver_id" Type="Int32" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblChat_tblUser" FromRole="tblChat" ToRole="tblUser" />
+    <NavigationProperty Name="tblUser1" Relationship="Self.FK_tblChat_tblUser1" FromRole="tblChat" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StateId" Type="Int32" />
+    <NavigationProperty Name="tblState" Relationship="Self.FK_tblCity_tblState" FromRole="tblCity" ToRole="tblState" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblCity" FromRole="tblCity" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblComplextion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Complextion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblComplextion" FromRole="tblComplextion" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblDiet">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Diet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblDiet" FromRole="tblDiet" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblEducation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Education" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblEducation" FromRole="tblEducation" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblGender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gender" Type="String" MaxLength="7" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblGender" FromRole="tblGender" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblHeight">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Height" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblHeight" FromRole="tblHeight" ToRole="tblUser" />
+    <NavigationProperty Name="tblWishLists" Relationship="Self.FK_tblWishList_tblHeight" FromRole="tblHeight" ToRole="tblWishList" />
+  </EntityType>
+  <EntityType Name="tblIncome">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Income" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblIncome" FromRole="tblIncome" ToRole="tblUser" />
+    <NavigationProperty Name="tblWishLists" Relationship="Self.FK_tblWishList_tblIncome" FromRole="tblIncome" ToRole="tblWishList" />
+  </EntityType>
+  <EntityType Name="tblLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoutValues" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMaritalStatu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblMaritalStatus" FromRole="tblMaritalStatus" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblProfession">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Profession" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblProfession" FromRole="tblProfession" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblReligion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblReligion" FromRole="tblReligion" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblCities" Relationship="Self.FK_tblCity_tblState" FromRole="tblState" ToRole="tblCity" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblState" FromRole="tblState" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblSubscription">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblSubscriptions" FromRole="tblSubscriptions" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender_id" Type="Int32" />
+    <Property Name="Contact" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Looking_for_id" Type="Int32" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Age_id" Type="Int32" />
+    <Property Name="Religion_id" Type="Int32" />
+    <Property Name="Education_id" Type="Int32" />
+    <Property Name="Marital_Status_id" Type="Int32" />
+    <Property Name="Profession_id" Type="Int32" />
+    <Property Name="Income_id" Type="Int32" />
+    <Property Name="City_id" Type="Int32" />
+    <Property Name="State_id" Type="Int32" />
+    <Property Name="Height_id" Type="Int32" />
+    <Property Name="Body_Type_id" Type="Int32" />
+    <Property Name="Diet_id" Type="Int32" />
+    <Property Name="Complextion_id" Type="Int32" />
+    <Property Name="Smoke_id" Type="Boolean" />
+    <Property Name="Drink_id" Type="Boolean" />
+    <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Family" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Subcription_id" Type="Int32" />
+    <NavigationProperty Name="tblAge" Relationship="Self.FK_tblUser_tblAge1" FromRole="tblUser" ToRole="tblAge" />
+    <NavigationProperty Name="tblBodyType" Relationship="Self.FK_tblUser_tblBodyType" FromRole="tblUser" ToRole="tblBodyType" />
+    <NavigationProperty Name="tblChats" Relationship="Self.FK_tblChat_tblUser" FromRole="tblUser" ToRole="tblChat" />
+    <NavigationProperty Name="tblChats1" Relationship="Self.FK_tblChat_tblUser1" FromRole="tblUser" ToRole="tblChat" />
+    <NavigationProperty Name="tblCity" Relationship="Self.FK_tblUser_tblCity" FromRole="tblUser" ToRole="tblCity" />
+    <NavigationProperty Name="tblComplextion" Relationship="Self.FK_tblUser_tblComplextion" FromRole="tblUser" ToRole="tblComplextion" />
+    <NavigationProperty Name="tblDiet" Relationship="Self.FK_tblUser_tblDiet" FromRole="tblUser" ToRole="tblDiet" />
+    <NavigationProperty Name="tblEducation" Relationship="Self.FK_tblUser_tblEducation" FromRole="tblUser" ToRole="tblEducation" />
+    <NavigationProperty Name="tblGender" Relationship="Self.FK_tblUser_tblGender" FromRole="tblUser" ToRole="tblGender" />
+    <NavigationProperty Name="tblHeight" Relationship="Self.FK_tblUser_tblHeight" FromRole="tblUser" ToRole="tblHeight" />
+    <NavigationProperty Name="tblIncome" Relationship="Self.FK_tblUser_tblIncome" FromRole="tblUser" ToRole="tblIncome" />
+    <NavigationProperty Name="tblMaritalStatu" Relationship="Self.FK_tblUser_tblMaritalStatus" FromRole="tblUser" ToRole="tblMaritalStatus" />
+    <NavigationProperty Name="tblProfession" Relationship="Self.FK_tblUser_tblProfession" FromRole="tblUser" ToRole="tblProfession" />
+    <NavigationProperty Name="tblReligion" Relationship="Self.FK_tblUser_tblReligion" FromRole="tblUser" ToRole="tblReligion" />
+    <NavigationProperty Name="tblState" Relationship="Self.FK_tblUser_tblState" FromRole="tblUser" ToRole="tblState" />
+    <NavigationProperty Name="tblSubscription" Relationship="Self.FK_tblUser_tblSubscriptions" FromRole="tblUser" ToRole="tblSubscriptions" />
+    <NavigationProperty Name="tblWishLists" Relationship="Self.FK_tblWishList_tblUser" FromRole="tblUser" ToRole="tblWishList" />
+  </EntityType>
+  <EntityType Name="tblWishList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_id" Type="Int32" />
+    <Property Name="Age_id" Type="Int32" />
+    <Property Name="Marital_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Diet" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Smoke" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Drink" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Body_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Comlextion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Profession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Income_id" Type="Int32" />
+    <Property Name="Height_id" Type="Int32" />
+    <NavigationProperty Name="tblAge" Relationship="Self.FK_tblWishList_tblAge" FromRole="tblWishList" ToRole="tblAge" />
+    <NavigationProperty Name="tblHeight" Relationship="Self.FK_tblWishList_tblHeight" FromRole="tblWishList" ToRole="tblHeight" />
+    <NavigationProperty Name="tblIncome" Relationship="Self.FK_tblWishList_tblIncome" FromRole="tblWishList" ToRole="tblIncome" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblWishList_tblUser" FromRole="tblWishList" ToRole="tblUser" />
+  </EntityType>
+  <Association Name="FK_tblUser_tblAge1">
+    <End Role="tblAge" Type="Self.tblAge" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Age_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblWishList_tblAge">
+    <End Role="tblAge" Type="Self.tblAge" Multiplicity="0..1" />
+    <End Role="tblWishList" Type="Self.tblWishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblWishList">
+        <PropertyRef Name="Age_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblBodyType">
+    <End Role="tblBodyType" Type="Self.tblBodyType" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBodyType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Body_Type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChat_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblChat" Type="Self.tblChat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblChat">
+        <PropertyRef Name="Sender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChat_tblUser1">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblChat" Type="Self.tblChat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblChat">
+        <PropertyRef Name="Reciver_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCity_tblState">
+    <End Role="tblState" Type="Self.tblState" Multiplicity="0..1" />
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblCity">
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="City_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblComplextion">
+    <End Role="tblComplextion" Type="Self.tblComplextion" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblComplextion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Complextion_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblDiet">
+    <End Role="tblDiet" Type="Self.tblDiet" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDiet">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Diet_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblEducation">
+    <End Role="tblEducation" Type="Self.tblEducation" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEducation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Education_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblGender">
+    <End Role="tblGender" Type="Self.tblGender" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGender">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblHeight">
+    <End Role="tblHeight" Type="Self.tblHeight" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHeight">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Height_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblWishList_tblHeight">
+    <End Role="tblHeight" Type="Self.tblHeight" Multiplicity="0..1" />
+    <End Role="tblWishList" Type="Self.tblWishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHeight">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblWishList">
+        <PropertyRef Name="Height_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblIncome">
+    <End Role="tblIncome" Type="Self.tblIncome" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncome">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Income_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblWishList_tblIncome">
+    <End Role="tblIncome" Type="Self.tblIncome" Multiplicity="0..1" />
+    <End Role="tblWishList" Type="Self.tblWishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncome">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblWishList">
+        <PropertyRef Name="Income_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblMaritalStatus">
+    <End Role="tblMaritalStatus" Type="Self.tblMaritalStatu" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMaritalStatus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Marital_Status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblProfession">
+    <End Role="tblProfession" Type="Self.tblProfession" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProfession">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Profession_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblReligion">
+    <End Role="tblReligion" Type="Self.tblReligion" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReligion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Religion_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblState">
+    <End Role="tblState" Type="Self.tblState" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="State_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblSubscriptions">
+    <End Role="tblSubscriptions" Type="Self.tblSubscription" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubscriptions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Subcription_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblWishList_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblWishList" Type="Self.tblWishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblWishList">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FutureSathiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblAges" EntityType="Self.tblAge" />
+    <EntitySet Name="tblBodyTypes" EntityType="Self.tblBodyType" />
+    <EntitySet Name="tblChats" EntityType="Self.tblChat" />
+    <EntitySet Name="tblCities" EntityType="Self.tblCity" />
+    <EntitySet Name="tblComplextions" EntityType="Self.tblComplextion" />
+    <EntitySet Name="tblDiets" EntityType="Self.tblDiet" />
+    <EntitySet Name="tblEducations" EntityType="Self.tblEducation" />
+    <EntitySet Name="tblGenders" EntityType="Self.tblGender" />
+    <EntitySet Name="tblHeights" EntityType="Self.tblHeight" />
+    <EntitySet Name="tblIncomes" EntityType="Self.tblIncome" />
+    <EntitySet Name="tblLogs" EntityType="Self.tblLog" />
+    <EntitySet Name="tblMaritalStatus" EntityType="Self.tblMaritalStatu" />
+    <EntitySet Name="tblProfessions" EntityType="Self.tblProfession" />
+    <EntitySet Name="tblReligions" EntityType="Self.tblReligion" />
+    <EntitySet Name="tblStates" EntityType="Self.tblState" />
+    <EntitySet Name="tblSubscriptions" EntityType="Self.tblSubscription" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <EntitySet Name="tblWishLists" EntityType="Self.tblWishList" />
+    <AssociationSet Name="FK_tblUser_tblAge1" Association="Self.FK_tblUser_tblAge1">
+      <End Role="tblAge" EntitySet="tblAges" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWishList_tblAge" Association="Self.FK_tblWishList_tblAge">
+      <End Role="tblAge" EntitySet="tblAges" />
+      <End Role="tblWishList" EntitySet="tblWishLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblBodyType" Association="Self.FK_tblUser_tblBodyType">
+      <End Role="tblBodyType" EntitySet="tblBodyTypes" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChat_tblUser" Association="Self.FK_tblChat_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblChat" EntitySet="tblChats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChat_tblUser1" Association="Self.FK_tblChat_tblUser1">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblChat" EntitySet="tblChats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCity_tblState" Association="Self.FK_tblCity_tblState">
+      <End Role="tblState" EntitySet="tblStates" />
+      <End Role="tblCity" EntitySet="tblCities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblCity" Association="Self.FK_tblUser_tblCity">
+      <End Role="tblCity" EntitySet="tblCities" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblComplextion" Association="Self.FK_tblUser_tblComplextion">
+      <End Role="tblComplextion" EntitySet="tblComplextions" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblDiet" Association="Self.FK_tblUser_tblDiet">
+      <End Role="tblDiet" EntitySet="tblDiets" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblEducation" Association="Self.FK_tblUser_tblEducation">
+      <End Role="tblEducation" EntitySet="tblEducations" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblGender" Association="Self.FK_tblUser_tblGender">
+      <End Role="tblGender" EntitySet="tblGenders" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblHeight" Association="Self.FK_tblUser_tblHeight">
+      <End Role="tblHeight" EntitySet="tblHeights" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWishList_tblHeight" Association="Self.FK_tblWishList_tblHeight">
+      <End Role="tblHeight" EntitySet="tblHeights" />
+      <End Role="tblWishList" EntitySet="tblWishLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblIncome" Association="Self.FK_tblUser_tblIncome">
+      <End Role="tblIncome" EntitySet="tblIncomes" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWishList_tblIncome" Association="Self.FK_tblWishList_tblIncome">
+      <End Role="tblIncome" EntitySet="tblIncomes" />
+      <End Role="tblWishList" EntitySet="tblWishLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblMaritalStatus" Association="Self.FK_tblUser_tblMaritalStatus">
+      <End Role="tblMaritalStatus" EntitySet="tblMaritalStatus" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblProfession" Association="Self.FK_tblUser_tblProfession">
+      <End Role="tblProfession" EntitySet="tblProfessions" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblReligion" Association="Self.FK_tblUser_tblReligion">
+      <End Role="tblReligion" EntitySet="tblReligions" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblState" Association="Self.FK_tblUser_tblState">
+      <End Role="tblState" EntitySet="tblStates" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblSubscriptions" Association="Self.FK_tblUser_tblSubscriptions">
+      <End Role="tblSubscriptions" EntitySet="tblSubscriptions" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWishList_tblUser" Association="Self.FK_tblWishList_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblWishList" EntitySet="tblWishLists" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

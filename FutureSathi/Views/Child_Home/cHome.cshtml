@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "cHome";
+    Layout = "~/Views/Shared/ChildLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        var myData = $("#card-container").data("mydata");
+        console.log(myData);
+
+        // Call a function to append the card
+        appendCard(myData);
+    });
+
+    function appendCard(userData) {
+        var cardContainer = $('#card-container');
+
+        $.each(userData, function (index, user) {
+        
+            if (user.Photos==null) {
+                user.Photos = "https://localhost:44352/Images/Profile/1.jpg";
+            }
+            // Create the card element
+            var card = $('<input type="number" name="name" value="' + user.id + '" style="display:none"/><div class="card">' + '<div class="d-flex justify-content-center"><img  src="' + user.Photos + '" alt="Profile Image" class="card-img-top w-50 rounded-3"></div>' + '<div class="card-body">' + '<h3 class="card-title">' + user.First_Name + ' ' + user.Last_Name + '</h3>' + '<p class="card-text">Age: ' + user.Age + '</p>' + '<p class="card-text">Religion: ' + user.religion + '</p>' + '<a onclick="getUser("' + user.id + '")" style="display:flex; justify-content:center" class=" btnview btn btn-info">View more</a>' + '</div > ' + '</div > ');
+
+            // Append the card to the container
+            cardContainer.append(card);
+        });
+    }
+</script>
+
+    <style>
+        .about-card {
+            width: 350px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            /*border: 1px solid #ff666D;*/
+            padding: 5px 10px;
+        }
+
+        .about-us {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            color: #ffffff;
+            background-color: #ff666D;
+            border-color: #ff666D;
+            /*margin-bottom: 20px*/
+        }
+
+            .btn:hover {
+                color: #ffffff;
+                background-color: #ff666D;
+                border-color: #ff666D;
+            }
+
+        .li {
+            justify-content: center;
+        }
+
+        .about-card {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+
+        .card {
+            width: 21rem !important;
+            margin: 17px 20px;
+        }
+
+        .green-checkmark {
+            color: green;
+        }
+
+        .red-cross {
+            color: red;
+        }
+
+        .checkmark,
+        .cross {
+            list-style: none;
+        }
+    </style>
+    <!--Card Append Body-->
+    <div id="card-container" class="d-flex  flex-wrap" data-mydata="@ViewBag.msg">
+
+
+
+
+    </div>

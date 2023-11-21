@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FutureSathiModelStoreContainer" CdmEntityContainer="FutureSathiEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FutureSathiModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAges">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblAge">
+        <MappingFragment StoreEntitySet="tblAge">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBodyTypes">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblBodyType">
+        <MappingFragment StoreEntitySet="tblBodyType">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblChats">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblChat">
+        <MappingFragment StoreEntitySet="tblChat">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Sender_id" ColumnName="Sender_id" />
+          <ScalarProperty Name="Reciver_id" ColumnName="Reciver_id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCities">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblCity">
+        <MappingFragment StoreEntitySet="tblCity">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblComplextions">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblComplextion">
+        <MappingFragment StoreEntitySet="tblComplextion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Complextion" ColumnName="Complextion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDiets">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblDiet">
+        <MappingFragment StoreEntitySet="tblDiet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEducations">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblEducation">
+        <MappingFragment StoreEntitySet="tblEducation">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGenders">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblGender">
+        <MappingFragment StoreEntitySet="tblGender">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHeights">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblHeight">
+        <MappingFragment StoreEntitySet="tblHeight">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblIncomes">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblIncome">
+        <MappingFragment StoreEntitySet="tblIncome">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Income" ColumnName="Income" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLogs">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblLog">
+        <MappingFragment StoreEntitySet="tblLog">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="RoutValues" ColumnName="RoutValues" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMaritalStatus">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblMaritalStatu">
+        <MappingFragment StoreEntitySet="tblMaritalStatus">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProfessions">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblProfession">
+        <MappingFragment StoreEntitySet="tblProfession">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Profession" ColumnName="Profession" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReligions">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblReligion">
+        <MappingFragment StoreEntitySet="tblReligion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStates">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblState">
+        <MappingFragment StoreEntitySet="tblState">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSubscriptions">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblSubscription">
+        <MappingFragment StoreEntitySet="tblSubscriptions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Gender_id" ColumnName="Gender_id" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Looking_for_id" ColumnName="Looking_for_id" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age_id" ColumnName="Age_id" />
+          <ScalarProperty Name="Religion_id" ColumnName="Religion_id" />
+          <ScalarProperty Name="Education_id" ColumnName="Education_id" />
+          <ScalarProperty Name="Marital_Status_id" ColumnName="Marital_Status_id" />
+          <ScalarProperty Name="Profession_id" ColumnName="Profession_id" />
+          <ScalarProperty Name="Income_id" ColumnName="Income_id" />
+          <ScalarProperty Name="City_id" ColumnName="City_id" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+          <ScalarProperty Name="Height_id" ColumnName="Height_id" />
+          <ScalarProperty Name="Body_Type_id" ColumnName="Body_Type_id" />
+          <ScalarProperty Name="Diet_id" ColumnName="Diet_id" />
+          <ScalarProperty Name="Complextion_id" ColumnName="Complextion_id" />
+          <ScalarProperty Name="Smoke_id" ColumnName="Smoke_id" />
+          <ScalarProperty Name="Drink_id" ColumnName="Drink_id" />
+          <ScalarProperty Name="Bio" ColumnName="Bio" />
+          <ScalarProperty Name="Photo_1" ColumnName="Photo_1" />
+          <ScalarProperty Name="Photo_2" ColumnName="Photo_2" />
+          <ScalarProperty Name="Photo_3" ColumnName="Photo_3" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+          <ScalarProperty Name="Subcription_id" ColumnName="Subcription_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWishLists">
+      <EntityTypeMapping TypeName="FutureSathiModel.tblWishList">
+        <MappingFragment StoreEntitySet="tblWishList">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="Age_id" ColumnName="Age_id" />
+          <ScalarProperty Name="Marital_Status" ColumnName="Marital_Status" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+          <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+          <ScalarProperty Name="Drink" ColumnName="Drink" />
+          <ScalarProperty Name="Body_Type" ColumnName="Body_Type" />
+          <ScalarProperty Name="Comlextion" ColumnName="Comlextion" />
+          <ScalarProperty Name="Profession" ColumnName="Profession" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Income_id" ColumnName="Income_id" />
+          <ScalarProperty Name="Height_id" ColumnName="Height_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

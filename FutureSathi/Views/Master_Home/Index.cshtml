@@ -1,0 +1,667 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Master_Layout.cshtml";
+}
+
+
+
+<script>
+
+    var UserList;
+    $(document).ready(function () {
+
+        $("#btnLogin").click(function () {
+            $("#ModelRegister").hide();
+            $("#ModelLogin").show();
+        });
+
+        $("#btnSignup").click(function () {
+            $("#ModelLogin").hide();
+            $("#ModelRegister").show();
+        });
+
+        $("[data-bs-dismiss='modal']").click(function () {
+            $("#ModelLogin").hide();
+            $("#ModelRegister").hide();
+            $("#ModelOTP").hide();
+        });
+
+        $("#btnRegSubmit").click(function () {
+            $("#ModelLogin").hide();
+
+
+            /*  Validation*/
+
+            $("#er_FName").text("");
+            $("#er_LName").text("");
+            $("#er_email").text("");
+            $("#er_Mobile_No").text("");
+            $("#er_pwd").text("");
+            $("#er_gender").text("");
+
+            debugger;
+
+            if ($("#F_Name").val() == "") {
+                /*$("#F_Name").css("background-color", "#ff9191");*/
+                $("#er_FName").css("color", "red");
+                $("#er_FName").text("First name is required");
+                return;
+            }
+
+
+            if ($("#L_Name").val() == "") {
+                $("#er_LName").css("color", "red");
+                $("#er_LName").text("Last name is required");
+                return;
+            }
+
+            if ($("#rdoMale").prop("checked") == false && $("#rdoFemale").prop("checked") == false) {
+                $("#er_gender").css("color", "red");
+                $("#er_gender").text("gender is required");
+                return;
+            }
+
+            if ($("#email").val() == "") {
+                $("#er_email").css("color", "red");
+                $("#er_email").text("Email is required");
+                return;
+            }
+
+            if ($("#Mobile_No").val() == "") {
+                $("#er_Mobile_No").css("color", "red");
+                $("#er_Mobile_No").text("Mobile is required");
+                return;
+            }
+
+
+            if ($("#pwd").val() == "") {
+                $("#er_pwd").css("color", "red");
+                $("#er_pwd").text("Password is required");
+                return;
+            }
+
+
+
+            $("#ModelRegister").hide();
+
+            sendOTP();
+            $("#ModelOTP").show();
+
+        });
+
+    });
+
+    //Email Verification
+    function sendOTP() {
+
+        debugger;
+        const FName = document.getElementById("F_Name").value;
+        const LName = document.getElementById("L_Name").value;
+        const MobNo = document.getElementById("Mobile_No").value;
+        const mail = document.getElementById("email").value;
+        const passw = document.getElementById("pwd").value;
+
+
+        var gender = 2;
+        if (document.getElementById('rdoMale').checked = true) {
+            gender = 1;
+        }
+
+        UserList = {
+            "First_Name": FName,
+            "Last_Name": LName,
+            "Gender_id": gender,
+            "Mobile_No": MobNo,
+            "Email": mail,
+            "Password": passw
+        }
+
+        /*console.log(UserList)*/
+
+
+
+
+        const email = document.getElementById('email').value;
+        let otp_val = Math.floor(Math.random() * 10000);
+
+        let emailbody = "<h1>Verify OTP</h1><br><h2>Your OTP is</h2>" + otp_val;
+        Email.send({
+            SecureToken: "2312664a-89ab-4a16-9a21-c124e177bc70",
+            To: email,
+            From: "shadabshaikh7722@gmail.com",
+            Subject: "My first email",
+            Body: emailbody
+        }).then(
+            //if success it returns "OK";
+            message => {
+
+
+                if (message === "OK") {
+                    /*alert("OTP sent to your email " + email);*/
+
+                    // now making otp input visible
+
+                    const otp_inp = document.getElementById('OTP');
+                    const otp_btn = document.getElementById('btnOTPSubmit');
+
+                    otp_btn.addEventListener('click', () => {
+                        // now check whether sent email is valid
+                        if (otp_inp.value == otp_val) {
+                            debugger;
+                            console.log(UserList);
+                            alert("Email address verified...");
+
+
+                            $.ajax({
+                                "url": "/User/Signin",
+                                "method": "post",
+                                "contentType": "application/json",
+                                "data": JSON.stringify(UserList),
+                                success: function (data) {
+                                    console.log(data);
+
+                                    $("#ModelOTP").hide();
+                                    alert("success");
+                                    $("#ModelLogin").show();
+
+                                },
+                                error: function (msg) {
+                                    console.log(msg);
+                                }
+                            })
+
+                        }
+                        else {
+                            alert("Invalid OTP");
+                        }
+                    })
+                }
+            }
+        );
+
+    }
+
+</script>
+@*1. carousel*@
+<div id="custom-carousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Images/M_Slider/BG1.jpg" alt="Matrimony Image 1" class="d-block w-100">
+            <div class="carousel-caption">
+                <h4 class="SliderContent" style="font-size: 1.7em;">#1 MATRIMONY</h4>
+                <h2 class="SliderContent">Find your </h2>
+                <h2 class="SliderContent"><span style="color: #FF666D">Right Match</span> here</h2>
+                <p class="SliderpContent">Most trusted Matrimony Brand in the World.</p>
+            </div>
+        </div>
+
+        <div class="carousel-item ">
+            <img src="~/Images/M_Slider/bg.jpg" alt="Matrimony Image 2" class="d-block w-100">
+            <div class="carousel-caption">
+                <h4 class="SliderContent" style="font-size: 1.7em;">#1 MATRIMONY</h4>
+                <h2 class="SliderContent">Find your </h2>
+                <h2 class="SliderContent"><span style="color: #FF666D">Right Match</span> here</h2>
+                <p class="SliderpContent">Most trusted Matrimony Brand in the World.</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="~/Images/M_Slider/BN.jpg" alt="Matrimony Image 3" class="d-block w-100">
+            <div class="carousel-caption">
+                <h4 class="SliderContent" style="font-size: 1.7em;">#1 MATRIMONY</h4>
+                <h2 class="SliderContent">Find your </h2>
+                <h2 class="SliderContent"><span style="color: #FF666D">Right Match</span> here</h2>
+                <p class="SliderpContent">Most trusted Matrimony Brand in the World.</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="~/Images/M_Slider/banner.jpg" alt="Matrimony Image 4" class="d-block w-100">
+            <div class="carousel-caption">
+                <h4 class="SliderContent" style="font-size: 1.7em;">#1 MATRIMONY</h4>
+                <h2 class="SliderContent">Find your </h2>
+                <h2 class="SliderContent"><span style="color: #FF666D">Right Match</span> here</h2>
+                <p class="SliderpContent">Most trusted Matrimony Brand in the World.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+@*2. Model: Register*@
+<div class="modal" id="ModelRegister">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title fw-bold">Signup</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="/">
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label ">First Name:</label>
+                        <input type="text" class="form-control" id="F_Name" placeholder="Enter First Name" name="F_Name">
+                        <span id="er_FName"></span>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="L_Name" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="L_Name" placeholder="Enter Last Name" name="L_Name">
+                        <span id="er_LName"></span>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Gender :</label><br>
+
+                        <input type="radio" id="rdoMale" name="Gender" value="1" class="form-check-input"> Male
+
+                        <input type="radio" id="rdoFemale" name="Gender" value="2" class="ms-2 form-check-input"> Female
+                        <br />
+                        <span id="er_gender"></span>
+                    </div>
+
+
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <span id="er_email"></span>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="Mobile_No" class="form-label">Mobile No:</label>
+                        <input type="number" class="form-control" id="Mobile_No" placeholder="Enter Mobile No" name="Mobile_No">
+                        <span id="er_Mobile_No"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                        <span id="er_pwd"></span>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center pb-3 pt-3">
+                        <button type="button" class="btn  w-100 text-white fw-bold" style="background-color: #FF666D" id="btnRegSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+@*3. Model: OTP Verification Modal*@
+<div class="modal" id="ModelOTP">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title fw-bold">OTP Verification</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="alert alert-success m-3 mb-0">
+                Please check your e-mail account for the verification code we just sent you and enter that code in the box below, and kindly check <span style="color:red">SPAM</span>
+
+            </div>
+
+            <div class="modal-body">
+                <form action="/">
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">OTP :</label>
+                        <input type="number" class="form-control " id="OTP" placeholder="Enter OTP" name="OTP">
+                    </div>
+
+                    <div class="d-flex justify-content-center pb-3 pt-3">
+                        <button type="button" class="btn  w-100 text-white fw-bold" style="background-color: #FF666D" id="btnOTPSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+@*4. Model: Login*@
+<div class="modal" id="ModelLogin" style="margin-top:20vh">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title fw-bold">Login</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="/">
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control " id="Email" placeholder=" 👤 Enter email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="🔒 Enter password" name="password">
+                    </div>
+
+                    <div class="d-flex justify-content-center pb-3 pt-3">
+                        <button type="submit" class="btn  w-100 text-white fw-bold" style="background-color: #FF666D" id="btnLogSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>*@
+
+        </div>
+    </div>
+</div>
+@*5. How it works*@
+<div class="row mt-2 mb-2">
+    <div class="about pt-4 pb-3" id="card" style=" background-color: rgb(255, 229, 217); box-sizing: border-box; padding: 15px 5px;">
+
+        <h2 class="about-head" style="text-align:center">How<span style="color: #FF666D; " id=""> It Works</span></h2>
+        <p class="about-head" style="text-align:center">Lets go</p>
+
+    </div>
+    <section>
+        <div class="wedd-tline">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="home-tit">
+                        @*<h2 style="text-align:center; padding:60px"><span>How it works</span></h2>*@
+                        <span class="leaf1"></span>
+                        <span class="tit-ani-"></span>
+                    </div>
+                    <div class="inn">
+                        <ul>
+                            <!--1. Register-->
+                            <li>
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/Register.png" class="rounded-5" alt="" loading="lazy">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 1: Register</h5>
+                                        <p>
+                                            Fill in your basic details, verify your phone number and email via OTP, and create your account to get started on our platform.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                            <li>
+                                <!--2. Login-->
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/Login.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 2: Login</h5>
+                                        <p>
+                                            Log in to your account using your credentials to access the features and services offered on our platform.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <!--3. Complete your Profile-->
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/completeProfile.jpg" alt="" loading="lazy" class="rounded-5">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 3: Complete your Profile</h5>
+                                        <p>
+                                            Provide additional details to complete your profile and enhance your chances of finding the perfect match.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <!--4. Find your match-->
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/find_your_match.jpg" alt="" loading="lazy" class="rounded-5">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 4: Find your match</h5>
+                                        <p>
+                                            Explore and discover potential matches based on your preferences and criteria.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                            <!--5.Show Intrest-->
+                            <li>
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/love-birds.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 9: Show Interest</h5>
+                                        <p>
+                                            Express your interest in potential matches to let them know you're interested in taking the next step in your journey.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <!--6. Buy Subscription-->
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/Sub.jpeg" alt="" loading="lazy" class="rounded-5">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 5: Buy Subscription</h5>
+                                        <p>
+                                            Subscribe to premium plans to unlock additional features and enhance your experience on our platform.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/network.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 6: Get Profile</h5>
+                                        <p>
+                                            Access and view detailed profiles of potential matches to make informed decisions.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/Meet.jpg" alt="" loading="lazy" class="rounded-3">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 7: Start meeting</h5>
+                                        <p>
+                                            Initiate conversations, express interest, and start meaningful interactions with potential matches.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="tline-inn">
+                                    <div class="tline-im animate animate__animated animate__slower" data-ani="animate__fadeInUp">
+                                        <img src="~/images/icon/Match.jpg" alt="" loading="lazy">
+                                    </div>
+                                    <div class="tline-con animate animate__animated animate__slow" data-ani="animate__fadeInUp">
+                                        <h5>Step 8: Getting married</h5>
+                                        <p>
+                                            Take the next step in your journey and celebrate the joyous occasion of getting married.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            // HOME PAGE - ON SCROLL ANIMATION
+            $(window).scroll(function () {
+                var windowpos1 = $(window).scrollTop();
+                // ANIMATE ADD CLASS
+                $(".animate").each(function () {
+                    var _anisec = $(this).offset().top + $(this).outerHeight() - 10;
+                    var _whei = $(window).scrollTop() + $(window).height();
+                    var _aniname = $(this).attr("data-ani");
+                    var _anidely = $(this).attr("data-dely");
+                    if (_whei >= _anisec) {
+                        $(this).addClass(_aniname);
+                        $(this).addClass("anistart");
+                        $(this).css("animation-delay", _anidely + "s");
+                    }
+                });
+                // HOME PAGE ANIMATION
+                if ($(".home-about, .count").length) {
+                    var _homfotban = $(".count").offset().top - 350;
+                    if (windowpos1 >= _homfotban) {
+                        $(".count").addClass("act");
+                    }
+                }
+            });
+
+
+        </script>
+    </section>
+
+
+</div>
+@*6. Subscription*@
+<div class="about pt-4 pb-3" id="card" style=" background-color: rgb(255, 229, 217); box-sizing: border-box; padding: 15px 5px;">
+
+    <h2 class="about-head">Awesome<span style="color: #FF666D; " id=""> Packages</span></h2>
+    <p class="about-head">Start your journey with exciting packages</p>
+
+</div>
+<div class="about-us mt-5">
+    <!-- Basic Membership-->
+    <div class="card mb-4" style="max-width: 18rem;" data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">
+
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center ">Basic Membership</h5>
+            <hr />
+            <p class="card-text">Duration: 1 month</p>
+            <ul class="list-unstyled">
+                <li class="checkmark"><span class="green-checkmark">✓</span> Basic profile creation</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Limited profile views</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Express interest</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Message premium members</li>
+                <li class="cross"><span class="red-cross">✗</span> Extended privacy controls</li>
+            </ul>
+            <h3 style="text-align: center " class="mb-3 mt-3"><span style="text-decoration: line-through;">₹500/-</span>  Free</h3>
+            <div style="display:flex; justify-content:center" class="m-1">
+
+                <a href="your_button_link" class="btn btn-danger mb-3">Get Started</a>
+
+            </div>
+        </div>
+    </div>
+    <!-- Standard Membership-->
+    <div class="card mb-4 " style="max-width: 18rem;" data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">
+
+
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center ">Standard Membership</h5>
+            <hr />
+            <p class="card-text">Duration: 3 months</p>
+            <ul class="list-unstyled">
+                <li class="checkmark"><span class="green-checkmark">✓</span> Basic profile creation</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Limited profile views</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Express interest</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Message premium members</li>
+                <li class="cross"><span class="red-cross">✗</span> Extended privacy controls</li>
+            </ul>
+            <h3 style="text-align: center " class="mb-3 mt-3">₹1500/-</h3>
+            <div style="display:flex; justify-content:center" class="m-1">
+                <a href="your_button_link" class="btn btn-danger mb-3">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <!-- Premium Membership-->
+    <div class="card mb-4" style="max-width: 18rem;" data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">
+
+
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center ">Premium Membership</h5>
+            <hr />
+            <p class="card-text">Duration: 6 months</p>
+            <ul class="list-unstyled">
+                <li class="checkmark"><span class="green-checkmark">✓</span> Basic profile creation</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Limited profile views</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Express interest</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Message premium members</li>
+                <li class="cross"><span class="red-cross">✗</span> Extended privacy controls</li>
+            </ul>
+            <h3 style="text-align: center " class="mb-3 mt-3">₹2500/-</h3>
+            <div style="display:flex; justify-content:center" class="m-1">
+                <a href="your_button_link" class="btn btn-danger mb-3">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <!-- Elite Membership-->
+    <div class="card mb-4" style="max-width: 18rem;" data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out">
+
+
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center ">Elite Membership</h5>
+            <hr />
+            <p class="card-text">Duration: 12 months</p>
+            <ul class="list-unstyled">
+                <li class="checkmark"><span class="green-checkmark">✓</span> Basic profile creation</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Limited profile views</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Express interest</li>
+                <li class="checkmark"><span class="green-checkmark">✓</span> Message premium members</li>
+                <li class="cross"><span class="red-cross">✗</span> Extended privacy controls</li>
+            </ul>
+            <h3 style="text-align: center " class="mb-3 mt-3">₹4000/-</h3>
+            <div style="display:flex; justify-content:center" class="m-1">
+                <a href="your_button_link" class="btn btn-danger mb-3">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase the box shadow on hover for a lifted effect */
+}
+
+/* Optional: Add padding and background color to the card content */
+.card .card-content {
+    padding: 16px;
+    background-color: #fff; /* Set your desired background color */
+    color: #333; /* Set the text color */
+}
+/*carousel style*/
+
+/* Default styles for the custom carousel */
+#custom-carousel .carousel-caption h4 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+#custom-carousel .carousel-caption h2,
+#custom-carousel .carousel-caption p {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+}
+
+/* Media queries for the custom carousel */
+@media (max-width: 768px) {
+    #custom-carousel .carousel-caption h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    #custom-carousel .carousel-caption h2,
+    #custom-carousel .carousel-caption p {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    #custom-carousel .carousel-caption h4 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    #custom-carousel .carousel-caption h2,
+    #custom-carousel .carousel-caption p {
+        font-size: 2em;
+        margin-bottom: 5px;
+    }
+}
+
+.carousel-item {
+    position: relative;
+    overflow: hidden;
+}
+
+    .carousel-item img {
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        animation: zoomInOut 10s infinite alternate;
+    }
+
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    vertical-align: middle;
+    color: white !important;
+    width: 60%;
+    height: 40%;
+}
+
+    .carousel-caption h4 {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    .carousel-caption h2,
+    .carousel-caption p {
+        font-size: 3.5em;
+        margin-bottom: 15px;
+    }
+
+    .carousel-caption::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(1px);
+        z-index: -1;
+    }
+
+.SliderContent {
+    color: white;
+    font-weight: bold;
+    font-family: var(--tit-font);
+}
+.SliderpContent {
+    color: white;
+    font-weight: bold;
+    font-family: var(--tit-font);
+    font-size: 1.5em !important;
+}
+
+/*-------------------------------------------------------*/
+/* COMMON CSS 
+/*-------------------------------------------------------*/
+html {
+overflow-x: hidden;
+}
+
+body {
+background: rgb(251, 248, 237);
+overflow-x: hidden !important;
+background-image: linear-gradient(135deg, #fdfcfb 0%, rgb(255 251 238) 100%);
+background-attachment: fixed;
+}
+
+* {
+margin: 0px;
+padding: 0px;
+box-sizing: border-box;
+border: 0px;
+font-style: inherit;
+font-variant: inherit;
+font-weight: inherit;
+font-stretch: inherit;
+font-size: inherit;
+line-height: inherit;
+vertical-align: baseline;
+font-family: Poppins, sans-serif;
+font-weight: 400;
+}
+
+:root {
+--mtop: 75px;
+--cta-dark: #000000;
+--cta-pink1: #607d8b;
+--cta-pink1h: #a16304;
+--tit-font: "Playfair Display", serif;
+}
+
+@media screen and (max-width: 1100px) {
+:root {
+--mtop: 70px;
+}
+}
+
+@media screen and (max-width: 992px) {
+:root {
+--mtop: 61px;
+}
+}
+
+@media screen and (max-width: 769px) {
+:root {
+--mtop: 50px;
+}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 0px;
+color: #66451c;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+li,
+label,
+tr,
+td,
+a,
+article,
+aside,
+details,
+figcaption,
+figure,
+header,
+hgroup,
+main,
+menu,
+nav,
+summary,
+input,
+textarea,
+select {
+font-family: Poppins, sans-serif;
+color: #66451c;
+}
+
+ul {
+padding: 0px;
+margin: 0px;
+}
+
+li {
+list-style-type: none;
+}
+
+ol,
+ul {
+list-style: none;
+}
+
+blockquote,
+q {
+quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+content: none;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0px;
+}
+
+h1,
+h1 b,
+h2,
+h2 span {
+font-family: var(--tit-font);
+}
+
+a {
+transition: all 0.5s ease 0s;
+text-decoration: none;
+}
+
+a:hover {
+transition: all 0.5s ease 0s;
+text-decoration: none;
+}
+
+img {
+max-width: 100%;
+object-fit: cover;
+}
+
+.form-group {
+margin-bottom: 1rem;
+}
+#Container {
+/*border:1px solid red;*/
+height: 95vh;
+background-image: url('/Images/MasterImage.jpg');
+background-repeat: no-repeat;
+background-size: 100% 100%;
+margin: 0px
+}
+
+#row {
+    border: 1px solid blue;
+    height: 100px;
+    background-color: rgb(251, 248, 237)
+}
+
+.about-head {
+text-align: center;
+}
+
+#about {
+border: 1px solid red;
+background-color: rgb(255, 229, 217);
+box-sizing: border-box;
+padding: 15px 5px;
+}
+
+.about-head-p {
+font-size: 20px;
+text-align: center;
+}
+
+label {
+font-weight: 600;
+}
+
+
+.about-card {
+    width: 350px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    /*border: 1px solid #ff666D;*/
+    padding: 5px 10px;
+    background-color: rgb(251, 248, 237)
+}
+
+.about-us {
+display: flex;
+justify-content: space-evenly;
+flex-wrap: wrap;
+}
+
+
+.li {
+justify-content: center;
+}
+
+.about-card {
+box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.card {
+max-width: 20rem !important;
+}
+
+.green-checkmark {
+color: green;
+}
+
+.red-cross {
+color: red;
+}
+
+.checkmark,
+.cross {
+list-style: none;
+}
+
+
+
+/*WEDDING BANNER*/
+.wedd-tline {
+/* Styles for the "How it works" section container */
+}
+
+.wedd-tline .inn {
+/* Styles for the inner container */
+margin: 0 auto;
+width: 70%;
+}
+
+.wedd-tline .inn ul {
+/* Styles for the unordered list */
+position: relative;
+float: left;
+width: 100%;
+}
+
+.wedd-tline .inn ul:before {
+/* Vertical line between timeline points */
+content: '';
+background: #ddcebc;
+position: absolute;
+width: 1px;
+top: 5px;
+bottom: 0;
+height: 98%;
+left: 50%;
+}
+
+.wedd-tline .inn ul li {
+/* Styles for each timeline point */
+position: relative;
+float: left;
+width: 100%;
+padding-bottom: 50px;
+}
+
+.wedd-tline .inn ul li:before {
+    /* Circle before each timeline point */
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #66451c;
+    z-index: 1;
+    border-radius: 50px;
+    border: 5px solid #fff;
+    box-sizing: border-box;
+    margin-top: 2px;
+    box-shadow: 0 0px 10px 0.6px rgb(40 30 20 / 8%);
+    left: calc(50% + -12px);
+}
+
+.tline-inn {
+/* Styles for the content of each timeline point */
+padding-left: 60px;
+float: left;
+width: 100%;
+}
+
+.tline-inn div {
+/* Styles for the content within each timeline point */
+}
+
+.tline-inn img {
+width: 170px;
+}
+
+.tline-inn div span {
+/* Styles for the span element within each timeline point */
+font-style: italic;
+font-size: 13px;
+font-weight: 600;
+text-transform: uppercase;
+color: #eb0359;
+}
+
+.tline-inn div h5 {
+/* Styles for the heading within each timeline point */
+font-family: var(--tit-font);
+font-size: 30px;
+}
+
+.tline-inn div p {
+/* Styles for the paragraph within each timeline point */
+padding: 20px 0 15px 0;
+margin: 0;
+font-size: 16px;
+line-height: 27px;
+}
+
+.tline-im {
+/* Styles for the image within each timeline point */
+float: left;
+width: 50%;
+padding-right: 70px;
+}
+
+.tline-im img {
+float: right;
+}
+
+.tline-con {
+/* Styles for the content within each timeline point */
+float: left;
+width: 50%;
+padding: 0 0 0 70px;
+}
+
+.tline-inn-reve .tline-im {
+padding: 0 0 0 70px;
+}
+
+.tline-inn-reve .tline-im img {
+float: left;
+}
+
+.tline-inn-reve .tline-con {
+padding: 0 70px 0 0;
+text-align: right;
+}
+
+.animate {
+opacity: 0;
+}
+
+.animate.anistart {
+opacity: 1;
+}
+
+/*-------------------------------------------------------*/
+/* WEDDING TIMELINE - HOW IT WORKS
+/*-------------------------------------------------------*/
+.wedding-timeline {
+float: left;
+width: 100%;
+padding: 80px 0;
+background-color: #f8f8f8;
+}
+.timeline-section {
+float: left;
+width: 100%;
+text-align: center;
+margin-bottom: 60px;
+}
+
+.timeline-item {
+float: left;
+width: 25%;
+position: relative;
+}
+
+.timeline-section h2 {
+font-size: 36px;
+color: #333; /* Adjust the text color */
+margin-bottom: 20px;
+}
+
+
+
+.timeline-item .date {
+font-size: 18px;
+font-weight: 600;
+color: #ca6300; /* Adjust the date text color */
+}
+
+.timeline-item .event {
+font-size: 16px;
+color: #555; /* Adjust the event text color */
+margin-top: 10px;
+}
+
+.timeline-item::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 20px;
+height: 20px;
+background-color: #ca6300; /* Adjust the dot color */
+border-radius: 50%;
+transform: translate(-50%, -50%);
+}
+
+.timeline-item:nth-child(even)::before {
+background-color: #555; /* Adjust the dot color for even items */
+}
+
+/*@media (max-width: 768px) {
+.timeline-item {
+width: 100%;
+margin-bottom: 40px;
+}
+}*/
+

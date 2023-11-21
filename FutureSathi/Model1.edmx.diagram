@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fead72c2b997488ab5b15fe0d9cc9058" Name="Diagram1">
+        <EntityTypeShape EntityType="FutureSathiModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblAge" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblBodyType" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblChat" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblCity" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblComplextion" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblDiet" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblEducation" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblGender" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblHeight" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblIncome" Width="1.5" PointX="3" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblLog" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblMaritalStatu" Width="1.5" PointX="3" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblProfession" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblReligion" Width="1.5" PointX="3" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblState" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblSubscription" Width="1.5" PointX="3" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblUser" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FutureSathiModel.tblWishList" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblAge1" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblWishList_tblAge" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblBodyType" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblChat_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblChat_tblUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblCity_tblState" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblCity" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblComplextion" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblDiet" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblEducation" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblGender" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblHeight" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblWishList_tblHeight" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblIncome" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblWishList_tblIncome" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblMaritalStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblProfession" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblReligion" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblState" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblUser_tblSubscriptions" ManuallyRouted="false" />
+        <AssociationConnector Association="FutureSathiModel.FK_tblWishList_tblUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
