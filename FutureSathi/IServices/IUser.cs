@@ -18,6 +18,8 @@ namespace FutureSathi.IServices
 
         dynamic GetPartialUserByGender(string s);  //--->Prasad Bhalerao_20-11-2023 13.30.00
 
+        dynamic GetAllUserInfo(string Name);
+
 
       
 

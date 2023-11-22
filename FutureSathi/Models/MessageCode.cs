@@ -10,5 +10,8 @@ namespace FutureSathi.Models
         public int Code { get; set; }
 
         public dynamic Message { get; set; }
+
+        public dynamic ReturnMessage { get; set; }
+
     }
 }
