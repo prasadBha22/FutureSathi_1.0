@@ -4,67 +4,1071 @@
     Layout = "~/Views/Shared/ChildLayout.cshtml";
 }
 <script>
+    var user;
+    var smoke;
+    var drink;
+    
     $(document).ready(function () {
         Getuser();
-        alert;
+
+        $("[data-bs-dismiss='modal']").click(function () {
+            $("#myModal").hide();
+            $("#myModal2").hide();
+            $("#myModal3").hide();
+        })
+        
+        $("#btn-Personal").click(function () {
+           
+            if ($("#Religion").val() == null ) {
+                $("#err_religion").html("Please Select  Religion");
+                $("#err_religion").css("color","red")
+                return;
+            }
+
+            if ($("#MarritalS").val() == null) {
+                $("#err_marital").html("Please Select  Marital Status");
+                $("#err_marital").css("color", "red")
+                return;
+            }
+
+            if ($("#age").val() == null) {
+                $("#err_age").html("Please Select  Age");
+                $("#err_age").css("color", "red")
+                return;
+            }
+
+            
+
+            if ($("#state").val() == null) {
+                $("#err_state").html("Please Select  State");
+                $("#err_state").css("color", "red")
+                return;
+            }
+
+            if ($("#city").val() == null) {
+                $("#err_city").html("Please Select City ");
+                $("#err_city").css("color", "red")
+                return;
+            }
+
+           
+           
+
+
+            $("#myModal").hide();
+            $("#myModal2").show();
+
+        })
+
+        $("#btn-Additional").click(function () {
+           /* debugger;*/
+            if ($("#Education").val() == null) {
+                $("#err_education").html("Please Select  Education");
+                $("#err_education").css("color", "red")
+                return;
+            }
+
+            if ($("#Profession").val() == null) {
+                $("#err_profession").html("Please Select Profession");
+                $("#err_profession").css("color", "red")
+                return;
+            }
+
+
+            if ($("#Income").val() == null) {
+                $("#err_income").html("Please Select  Income ");
+                $("#err_income").css("color", "red")
+                return;
+            }
+
+            $("#LookingF").val();
+
+            if ($("#LookingF").val() == null) {
+                $("#err_looking").html("Please Select  Looking For");
+                $("#err_looking").css("color", "red")
+                return;
+            }
+
+
+            if ($("#Height").val() == null) {
+                $("#err_height").html("Please Select  Height");
+                $("#err_height").css("color", "red")
+                return;
+            }
+
+
+            if ($("#Bodytype").val() == null) {
+                $("#err_bodytype").html("Please Select  Bodytype ");
+                $("#err_bodytype").css("color", "red")
+                return;
+            }
+
+            if ($("#Diet").val() == null) {
+                $("#err_diet").html("Please Select  Diet");
+                $("#err_diet").css("color", "red")
+                return;
+            }
+
+            if ($("#Complextion").val() == null) {
+                $("#err_complextion").html("Please Select  Complextion");
+                $("#err_complextion").css("color", "red")
+                return;
+            }
+
+
+
+           
+            
+            $("#myModal2").hide();
+            $("#myModal3").show();
+        })
+
+        $("#btn-back2").click(function () {
+
+           
+
+            $("#myModal2").hide();
+            $("#myModal").show();
+        })
+
+
+        $("#btn-back3").click(function () {
+
+            $("#myModal3").hide();
+            $("#myModal2").show();
+        })
+
+        $("#state").change(function () {
+
+           
+            $.ajax({
+                
+                "url": "/profile/getCity?id=" + $("#state").val(),
+               "method": "get",
+                success: function (response) {
+                    $("#city").empty();
+                    $.each(response, function (i, item) {
+                        $("#city").append(
+
+                            '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                        );
+                    });
+                },
+                error: function (error) {
+
+                }
+
+            });
+
+
+        });
+
+
+        $("#txtPhoto1").change(function () {
+
+            var formData = new FormData();
+            var totalFiles = document.getElementById("txtPhoto1").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("txtPhoto1").files[i];
+                formData.append("txtPhoto1", file);
+            }
+               
+            $.ajax({
+                type: "POST",
+                url: '/profile/UserPhoto',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                },
+                error: function (error) {
+
+                }
+                
+            });
+
+        });
+
+
+        
+
+        $("#btn-submit").click(function () {
+
+            debugger;
+            //if ($("#DrinkIdY").prop("checked", false) && $("#DrinkIdN").prop("checked", false)) {
+            //    $("#err_drink").html("Please Select Drink habbit ");
+            //    $("#err_drink").css("color", "red")
+            //    return;
+            //}
+
+            //if ($("#SmokeIdY").prop("checked", false) && $("#SmokeIdN").prop("checked", false)) {
+            //    $("#err_smoke").html("Please Select Smoke habbit ");
+            //    $("#err_smoke").css("color", "red")
+            //    return;
+            //}
+
+            if ($("#bio").val() == "") {
+                $("#err_bio").html("Please Fill  Bio");
+                $("#err_bio").css("color", "red")
+                return;
+            }
+
+            if ($("#Family").val() == "") {
+                $("#err_family").html("Please Fill  Bio");
+                $("#err_family").css("color", "red")
+                return;
+            }
+
+         
+            if ($("#DrinkIdY").prop("checked", true)) {
+                drink=true
+            }
+            else {
+                drink = false;
+            }
+
+
+            if ($("#SmokeIdY").prop("checked", true)) {
+                smoke = true
+            }
+            else {
+                smoke = false;
+            }
+            
+            user = {
+
+                "First_Name": $("#Fname").val(),
+                "Last_Name": $("#Lname").val(),
+                "Email": $("#Email").val(),
+                "Gender_id": $("#Gender").val(),
+                "Mobile_No": $("#contact").val(),
+                "Password": $("#Password").val(),
+                "Religion_id": $("#Religion").val(),
+                "Education_id": $("#Education").val(),
+                "Looking_for_id": $("#LookingF").val(),
+                "Marital_Status_id": $("#MarritalS").val(),
+                "Profession_id": $("#Profession").val(),
+                "Income_id": $("#Income").val(),
+                "Diet_id": $("#Diet").val(),
+                "City_id": $("#city").val(),
+                "State_id": $("#state").val(),
+                "Age_id": $("#age").val(),
+                "Height_id": $("#Height").val(),
+                "Body_Type_id": $("#Bodytype").val(),
+                "Complextion_id": $("#Complextion").val(),
+                "Bio": $("#bio").val(),
+                "id": $("#userid").val(),
+                "Family": $("#Family").val(), 
+                "Smoke_id": smoke,
+                "Drink_id": drink
+                
+            }
+
+           
+            $.ajax({
+
+                "url": "https://localhost:44352/Profile/UpdateUser",
+                "method": "post",
+                "contentType": "application/json",
+                "data": JSON.stringify(user),
+                success: function (respo) {
+                    console.log(respo);
+                    if (respo==true) {
+                        alert("SucessFull")
+                    }
+                },
+                error: function () {
+                    }
+
+
+
+            })
+
+        })
+
+
+
+        
+
+
 
     });
 
     function Getuser() {
-
+        
         $.ajax({
 
             "url": "https://localhost:44352/Profile/GetUser",
             "Method": "get",
             success: function (respo)
             {
-                console.log(respo.ReturnMessage);
+
                 var user = respo.Message;
+                console.log(user);
                 var wishlist = respo.ReturnMessage;
                 var smoke;
                 var Drink;
-                console.log(user.Smoke_id);
-                if (user.Smoke_id==null) {
-                    smoke = "null";
-                }
 
-                if (user.Drink_id==null) {
-                    Drink = "null";
-                }
 
-                $("#profile").append("<div class='container d-flex justify-content-center'><div class='col-4 pt-3 pb-3 rounded-circle'><div class='d-flex justify-content-center'><img src='/Images/Profile/1.jpg' class='w-50 rounded-circle'></div></div></div>@*about myself*@<div class='container border rounded-4 mb-4  p-3'><h3 class='pb-3'>About MySelf</h3><div><span>" + user.Bio + "</span></div></div>@*personal details*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Personal Details </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + user.Age + "</td></tr><tr><th>Height</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>MobileNo</th><td>value</td><tr><th>Email</th><td>value</td></tr><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td> </tr><tr><th>Family</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>-@*partnerwishlist*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + wishlist.Agee + "</td></tr><tr><th>Religion</th><td>" + wishlist.Religion + "</td><tr><th>Marrital status</th><td>" + wishlist.Marital_Status + "</td><tr><th>Education</th><td>" + wishlist.Education + "</td><tr><th>Profession</th><td>" + wishlist.Profession + "</td></tr><tr><th>Income</th><td>" + wishlist.Income + "</td><tr><th>Diet</th><td>" + wishlist.Diet + "</td></tr><tr><th>Complextion</th><td>" + wishlist.Comlextion + "</td> </tr><tr><th>Height</th><td>" + wishlist.Height + "</td></tr><tr><th>City</th><td>" + "na" + "</td></tr><tr><th>Body Type</th><td>" + wishlist.Body_Type + "</td></tr><tr><th>State</th><td>" + wishlist.State + "</td></tr></tbody></table></div>@*cards-start*@<div class='container-fluid d-flex flex-wrap justify-content-evenly'> @*card1*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/Food.jpg' class='w-75'></div><h6 style='text-align:center' class='mb-3 mt-3 pt-3'>Food</h6> <div style='display: flex; justify-content: center' class='m-1'><h6>No</h6> </div> </div></div> @*card 2*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in ' data-aos-duration='1000' data-aos-easing='ease -in -out'><div class='card-body'> <div class='d-flex justify-content-center'><img src='/Images/Smoke.jpg' class='w-75'></div> <h6 style='text-align:center' class='mb- 3 mt-3 pt-3'>Smoke Habbit</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-3'>No</h6></div></div></div>@*card 3*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content- center'><img src='/Images/Drink2.jpg' class='w-100'></div><h6 style='text-align: center' class='mb-3 mt- 3'></h6><div style='display: flex; justify-content: center' class='m-1'><h6>No</h6></div></div></div> @*card 4*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/gym2.jpg' class='w-75'></div><h6 style='text-align: center' class='mb-3 mt-3  pt-2'>BodyType</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-4'>No</h6></div></div></div></div> ");
-                console.log(respo.ReturnMessage)
+
+                $("#profile").append("<div class='container d-flex justify-content-center'><div class='col-4 pt-3 pb-3 rounded-circle'><div class='d-flex justify-content-center'><img src='/UserPhoto/"+user.Photo_1+"' class='w-50 rounded-circle'></div></div></div> <div class='d-flex justify-content-center '> <a class='btn text-white' style='Background-color:#ff666d' onclick='Edit(" + user.id + ")'>Edit Profile<a/></div>@*about myself*@<div class='container border rounded-4 mb-4 mt-3 p-3'><h3 class='pb-3'>About MySelf</h3><div><h5>" + user.Bio + "</h5></div></div>@*personal details*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Personal Details </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + user.Age + "</td></tr><tr><th>Height</th><td>" + user.Height + "</td><tr><th>Marrital status</th><td>" + user.Marritalstatus + "</td><tr><th>MobileNo</th><td>" + user.Contact + "</td><tr><th>Email</th><td>" + user.Email + "</td></tr><tr><th>Education</th><td>" + user.Education + "</td><tr><th>Profession</th><td>" + user.Profession + "</td></tr><tr><th>Income</th><td>" + user.Income + "</td> </tr><tr><th>Family</th><td>" + user.Family + "</td></tr><tr><th>City</th><td>" + user.City + "</td></tr><tr><th>State</th><td>" + user.State + "</td></tr></tbody></table></div>-@*partnerwishlist*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + wishlist.Agee + "</td></tr><tr><th>Religion</th><td>" + wishlist.Religion + "</td><tr><th>Marrital status</th><td>" + wishlist.Marital_Status + "</td><tr><th>Education</th><td>" + wishlist.Education + "</td><tr><th>Profession</th><td>" + wishlist.Profession + "</td></tr><tr><th>Income</th><td>" + wishlist.Income + "</td><tr><th>Diet</th><td>" + wishlist.Diet + "</td></tr><tr><th>Complextion</th><td>" + wishlist.Comlextion + "</td> </tr><tr><th>Height</th><td>" + wishlist.Height + "</td></tr><tr><th>City</th><td>" + "na" + "</td></tr><tr><th>Body Type</th><td>" + wishlist.Body_Type + "</td></tr><tr><th>State</th><td>" + wishlist.State + "</td></tr></tbody></table></div>@*cards-start*@<div class='container-fluid d-flex flex-wrap justify-content-evenly'> @*card1*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/Food.jpg' class='w-75'></div><h6 style='text-align:center' class='mb-3 mt-3 pt-3'>Food</h6> <div style='display: flex; justify-content: center' class='m-1'><h6>No</h6> </div> </div></div> @*card 2*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in ' data-aos-duration='1000' data-aos-easing='ease -in -out'><div class='card-body'> <div class='d-flex justify-content-center'><img src='/Images/Smoke.jpg' class='w-75'></div> <h6 style='text-align:center' class='mb- 3 mt-3 pt-3'>Smoke Habbit</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-3'>No</h6></div></div></div>@*card 3*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content- center'><img src='/Images/Drink2.jpg' class='w-100'></div><h6 style='text-align: center' class='mb-3 mt- 3'></h6><div style='display: flex; justify-content: center' class='m-1'><h6>No</h6></div></div></div> @*card 4*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/gym2.jpg' class='w-75'></div><h6 style='text-align: center' class='mb-3 mt-3  pt-2'>BodyType</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-4'>No</h6></div></div></div></div> ");
+
 
             },
-            error: function () {
-
+            error: function (er) {
+                
             }
 
 
 
         });
-    }
 
 
+
+    };
+
+
+
+    function Edit(Id) {
+      
+        var smoke;
+        var drink;
+        $.ajax({
+
+            "url": "https://localhost:44352/Profile/EditProfile?id=" + Id,
+            "Method": "get",
+            success: function (obj) {
+                respo = obj.ReturnMessage;
+                console.log(respo.Smoke_id);
+               
+                $("#myModal").show();
+
+
+                    $.each(obj.AgeDrop, function (i, item) {
+                        $("#age").append(
+
+                            '<option value=' + item.Value + '>' + item.Text+'</option>'
+
+                        );
+                    });
+
+
+                $.each(obj.ReligionDrop, function (i, item) {
+                    $("#Religion").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+                $.each(obj.BodytypeDrop, function (i, item) {
+                    $("#Bodytype").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+
+                $.each(obj.GenderDrop, function (i, item) {
+                    $("#Gender").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+                $.each(obj.EducationDrop, function (i, item) {
+                    $("#Education").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+                $.each(obj.LookingForDrop, function (i, item) {
+                    $("#LookingF").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+                $.each(obj.HeightDrop, function (i, item) {
+                    $("#Height").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+                $.each(obj.CityDrop, function (i, item) {
+                    $("#city").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+                $.each(obj.StateDrop, function (i, item) {
+                    $("#state").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+                $.each(obj.MaritalstatusDrop, function (i, item) {
+                    $("#MarritalS").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+                $.each(obj.ComplexionDrop, function (i, item) {
+                    $("#Complextion").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+                $.each(obj.IncomeDrop, function (i, item) {
+                    $("#Income").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+
+                $.each(obj.ProffesionDrop, function (i, item) {
+                    $("#Profession").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+               
+                $.each(obj.DietDrop, function (i, item) {
+                   
+                    $("#Diet").append(
+
+                        '<option value=' + item.Value + '>' + item.Text + '</option>'
+
+                    );
+                });
+
+
+
+
+
+
+
+               
+
+                $("#Fname").val(respo.First_Name);
+                $("#Lname").val(respo.Last_Name);
+                $("#age").val(respo.Age);
+                $("#contact").val(respo.Contact);
+                $("#Bodytype").val(respo.body);
+                 $("#Gender").val(respo.Gender);
+       
+               /* $("#dateofbirth").val(respo.DOB);*/
+                $("#state").val(respo.State);
+                $("#city").val(respo.City);
+                $("#Religion").val(respo.Religion);
+                $("#Email").val(respo.Email);
+                $("#Education").val(respo.Education);
+                $("#Password").val(respo.Password)
+                $("#Income").val(respo.Income);
+                $("#userid").val(respo.id);
+                $("#Diet").val(respo.Diet);
+               /* console.log(respo.Id);*/
+              
+                $("#Height").val(respo.Height);
+               
+                $("#LookingF").val(respo.LookingFor);
+
+
+                $("#bio").val(respo.Bio);
+                $("#Profession").val(respo.Profession);
+                $("#Complextion").val(respo.Complextion);
+              //  $("#txtPhoto1").val(respo.Photo_1);
+              
+                $("#MarritalS").val(respo.Marital_Status_id);
+
+
+
+                debugger;
+                console.log(respo.Smoke_id);
+                if (respo.Smoke_id == true) {
+                    
+                     $("#SmokeIdY").prop("checked",true);
+                    /* $("#SmokeIdY").("checked",true);*/
+                }
+                if (respo.Smoke_id == false) {
+
+                    $("#SmokeIdN").prop("checked", true);
+                    /* $("#SmokeIdY").("checked",true);*/
+                }
+               
+                else {
+                    $("#SmokeIdY").prop("checked", false);
+                    $("#SmokeIdN").prop("checked", false);
+                }
+
+
+               
+                if (respo.Drink_id==true) {
+                    $("#DrinkIdY").prop("checked",true);
+                }
+
+                if (respo.Drink_id == false) {
+                    $("#DrinkIdN").prop("checked", true);
+                }
+
+               
+                else {
+                    $("#DrinkIdN").prop("checked", false);
+                    $("#DrinkIdY").prop("checked", false);
+                }
+
+
+                   
+              
+
+              
+               
+               
+            
+
+               
+
+
+
+
+
+
+
+
+
+            },
+            error: function () {
+
+            }
+        });
+
+}
 </script>
 <h2></h2>
 
-@*profile*@
-<!--<div class="container d-flex justify-content-center "><div class="col-4 pt-3 pb-3 rounded-circle  "><div class="d-flex justify-content-center"><img src="~/Images/Profile/1.jpg" class="w-50 rounded-circle"></div></div></div>-->@*about myself*@<!--<div class="container border rounded-4 mb-4  p-3 "><h3 class="pb-3">About MySelf</h3><div><span>fjfakakfdkadkffjffkdkaallafjjgkdlslall</span></div></div>-->
-@*personal details*@
-<!--<div class="container pt-3 border rounded-4  mb-4"><div class="col-12  "><div class=""><h3 class="pb-3">Personal Details</h3><label class="form-label">Age :</label><span>23</span><br /><label class="form-label">Height :</label><span>23</span><br /><label class="form-label">Marrital Status :</label><span>23</span><br /><label class="form-label">Mobile No :</label><span>23</span><br /><label class="form-label">Email:</label><span>23</span><br /><label class="form-label">Education :</label><span>23</span><br /><label class="form-label">Profession :</label><span>23</span><br /><label class="form-label">Income :</label><span>23</span><br /><label class="form-label">Family :</label><span>23</span><br /><label class="form-label">City :</label><span>23</span><br /><label class="form-label">State :</label><span>23</span><br /></div> </div>  </div>--
->@*partnerwishlist*@<!--<div class="container  border rounded-4 pt-3 pb-3 mb-3"><h3 class="pb-4 text-center"> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>value</td></tr><tr><th>Religion</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td><tr><th>Diet</th><td>value</td></tr><tr><th>Complextion</th><td>value</td> </tr><tr><th>Height</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>Body Type</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>--
-
-@*cards*@<!--<div class="container p-3  d-flex justify-content-evenly"><div class=" border rounded-4 d-flex justify-content- center  "><div><img src="~/Images/Food.jpg " class="w-100" /><h6 class="text-center">Non-veg/Veg</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/Drink2.jpg" class="w-100" /><h6 class="text-center">Drink</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/Smoke.jpg" class="w-100" /><h6 class="text-center">Smoke</h6><span></span></div></div><div class=" border rounded-4 d-flex justify-content-center "><div><img src="~/Images/gym2.jpg" class="w-100" /><h6 class="text-center">BodyType</h6><span></span></div></div></div>-->
->@*partnerwishlist*@
-@*<div class="container  border rounded-4 pt-3 pb-3 mb-3"><h3 class="pb-4 text-center"> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>value</td></tr><tr><th>Height</th><td>value</td><tr><th>Marrital status</th><td>value</td><tr><th>MobileNo</th><td>value</td><tr><th>Email</th><td>value</td></tr><tr><th>Education</th><td>value</td><tr><th>Profession</th><td>value</td></tr><tr><th>Income</th><td>value</td> </tr><tr><th>Family</th><td>value</td></tr><tr><th>City</th><td>value</td></tr><tr><th>State</th><td>value</td></tr></tbody></table></div>--*@
-
-
-<!--<div class='container-fluid d-flex flex-wrap justify-content-evenly'>--> @*card1*@<!--<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class="card-body"><div class="d-flex justify-content-center"><img src="~/Images/Food.jpg" class="w-75"></div><h6 style="text-align: center " class="mb-3 mt-3">Food</h6> <div style="display:flex; justify-content:center" class="m-1"><h6>No</h6> </div> </div></div>--> @*card 2*@<!--<div class="card mb-4 rounded-4" style="max-width: 18rem; " data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out"><div class="card-body"> <div class="d-flex justify-content-center"><img src="~/Images/Smoke.jpg" class="w-75"></div> <h6 style="text-align: center " class="mb-3 mt-3">Smoke Habbit</h6><div style="display:flex; justify-content:center" class="m-1"><h6>No</h6></div></div></div>-->@*card 3*@<!--<div class="card mb-4 rounded-4" style="max-width: 18rem; " data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out"><div class="card-body"><div class="d-flex justify-content-center"><img src="~/Images/Drink2.jpg" class="w-75"></div><h6 style="text-align: center " class="mb-3 mt-3">Drink Habbit</h6><div style="display:flex; justify-content:center" class="m-1"><h6>No</h6></div></div></div>--> @*card 4*@<!--<div class="card mb-4 rounded-4" style="max-width: 18rem; " data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-in-out"><div class="card-body"><div class="d-flex justify-content-center"><img src="~/Images/gym2.jpg" class="w-75"></div><h6 style="text-align: center " class="mb-3 mt-3">BodyType</h6><div style="display:flex; justify-content:center" class="m-1"><h6>No</h6></div> </div></div></div>-->
+<div class="container-fluid" id="profile"></div>
 
 
 
 
 
 
-<div  class="container-fluid" id="profile"></div>
+<!-- The Modal 1 -->
+
+
+<div class="container mt-4">
+    <form id="userForm1">
+        <!-- The Modal -->
+        <div class="modal" id="myModal" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            Personal Information</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
+
+
+
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2">First Name:</label>
+
+                                <div class="col-md-10">
+
+                                    <input type="text" class="form-control" id="Fname" name="Fname" />
+                                </div>
+
+                            </div>
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2">Last Name:</label>
+
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="Lname" name="Lname" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2">Gender:</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Gender" name="Gender">
+                                       
+                                     <option value="">Not set</option>
+
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2">Date Of Birth:</label>
+
+                                <div class="col-md-10">
+                                    <input type="datetime-local" class="form-control" id="dateofbirth" name="dateofbirth" />
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2"> State:</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="state" name="state">
+                                    </select>
+                                    <span id="err_state"></span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2"> City:</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="city" name="city">
+                                    </select>
+                                    <span id="err_city"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Age:</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="age" name="age">
+                                    </select>
+                                    <span id="err_age"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-4 mb-2">
+
+                                <label class="form-label col md-2"> Religion:</label>
+                                
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Religion" name="Religion">
+                                        
+                                    </select>
+                                    <span id="err_religion"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-4 mb-2">
+
+                                <label class="form-label col md-2"> Marrital Status :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="MarritalS" name="MarritalS">
+                                    </select>
+                                    <span id="err_marital"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-4 mb-2">
+
+                                <label class="form-label col md-2">Contact:</label>
+
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" id="contact" name="contact" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-4 mb-2">
+
+                                <label class="form-label col md-2">Email:</label>
+
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" id="Email" name="Email" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-4 mb-2">
+
+                                <label class="form-label col md-2">Password:</label>
+
+                                <div class="col-md-10">
+                                    <input type="password" class="form-control" id="Password" name="Password" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <a class="btn w-25 " style="background-color: #ff666d;color:white  " id="btn-Personal">Next</a>
+                        </div>
+                        <hr />
+
+                        @*Additional Inform*@
+
+
+
+
+                        <!-- Modal footer -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+@*Additional Information*@
+<div class="container mt-4">
+    <form id="userForm2">
+        <!-- The Modal -->
+        <div class="modal" id="myModal2" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Additional Information</h4>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
+
+
+
+                        @*Additional Inform*@
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Education :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Education" name="Education">
+                                        <option value="null">Not set</option>
+                                    </select>
+                                   <span id="err_education"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Profession :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Profession" name="Profession">
+                                    </select>
+                                    <span id="err_profession"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Income :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Income" name="Income">
+                                    </select>
+                                    <span id="err_income"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Looking For :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="LookingF">
+                                        
+                                    </select>
+                                    <span id="err_looking"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Height :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Height" name="Height">
+                                    </select>
+                                    <span id="err_height"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> BodyType :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Bodytype" name="Bodytype">
+                                    </select>
+                                    <span id="err_bodytype"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Diet :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Diet" name="Diet">
+                                    </select>
+                                    <span id="err_diet"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Complextion :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Complextion" name="Complextion">
+                                    </select>
+                                    <span id="err_complextion"></span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <!-- Modal footer -->
+
+
+                        </div>
+
+
+
+                        <div class="d-flex justify-content-center">
+                            <a class="btn w-25 " style="background-color: #ff666d; color:white  " id="btn-Additional">Next</a>
+                        </div>
+
+
+                        <div class="d-flex justify-content-center pt-3">
+                            <a class="btn btn-dark  " style="color:white   " id="btn-back2">Back</a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@*Additional Information.2*@
+<div class="container mt-4">
+    <form id="userForm3">
+        <!-- The Modal -->
+        <div class="modal" id="myModal3" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Additional Information</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
+
+
+
+
+                        @*Additional Inform*@
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+
+
+
+
+                            <div class="col-6 mb-2 p-2">
+                                <label class="form-label col md-2"> Smoke :</label>
+
+                                <div class="col-md-12">
+
+                                    <input type="radio" id="SmokeIdY" class="p-3" name="SmokeId" /> Yes
+
+                                    <input type="radio" id="SmokeIdN" class="p-3" name="SmokeId" /> no
+                                </div>
+                                <span id="err_smoke"></span>
+                            </div>
+
+
+                            <div class="col-6 mb-2 p-2">
+                                <label class="form-label col md-2"> Drink :</label>
+
+                                <div class="col-md-10">
+                                    <input type="radio" id="DrinkIdY" class="p-3" name="DrinkId" /> Yes
+
+                                    <input type="radio" id="DrinkIdN" class="p-3" name="DrinkId" /> no
+
+                                </div>
+                                <span id="err_drink"></span>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+                                <label class="form-label col md-2"> File :</label>
+
+                                <div class="col-md-10">
+                                    <input type="file" id="txtPhoto1" name="txtPhoto1" value="" class="form-control" />
+                                </div>
+                                <span id="err_smoke"></span>
+                            </div>
+
+
+
+
+
+                            <div class="col-12 mb-2 p-2">
+                                <label class="form-label col md-2"> Bio :</label>
+
+                                <div class="col-md-10">
+                                    <textarea id="bio" class="form-control"></textarea>
+                                </div>
+                                <span id="err_bio"></span>
+
+
+                                <div class="col-12 mb-2 p-2">
+                                    <label class="form-label col md-2"> About Family :</label>
+
+                                    <div class="col-md-10">
+                                        <textarea id="Family" class="form-control"></textarea>
+                                    </div>
+                                    <span id="err_family"></span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                      
+
+
+                        <div class="col-md-10 d-none">
+                            <input type="text" id="userid" class="form-control" name="userid"  />
+
+                        </div>
+
+
+
+                        <div class="d-flex justify-content-center">
+                            <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-submit">Submit</a>
+
+
+                        </div>
+
+                        <div class="d-flex justify-content-center pt-3">
+                            <a class="btn btn-dark  " style="color:white  " id="btn-back3">Back</a>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@*<label>First Name </label>
+    <input type="text" id="Fname" name="Fname" />
+
+
+    <label>First Name </label>
+    <input type="text" id="Fname" name="Fname" />*@
+
+
+
+
+
+
+
+
+

@@ -45,6 +45,26 @@ namespace FutureSathi.App_Start
             }
         }
 
+
+
+        public static List<SelectListItem> GetLookingFor()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            using (var ctx = new FutureSathiEntities())
+            {
+                var obj = ctx.tblGenders.Select(s => new { s.id, s.Gender }).ToList();
+                foreach (var item in obj)
+                {
+                    SelectListItem t = new SelectListItem();
+                    t.Text = item.Gender;
+                    t.Value = item.id.ToString();
+                    list.Add(t);
+                }
+
+                return list;
+            }
+        }
+
         public static List<SelectListItem> GetAge()
         {
             List<SelectListItem> list = new List<SelectListItem>();

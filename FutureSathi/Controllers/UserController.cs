@@ -47,14 +47,6 @@ namespace FutureSathi.Controllers
             return Json(rep, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetUser(int id)
-        {
-
-            var obj = _user.GetAllUserInfo(id);
-
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
-
 
     }
 }
