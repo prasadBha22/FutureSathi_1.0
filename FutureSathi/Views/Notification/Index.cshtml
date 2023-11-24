@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/ChildLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        LoadData();
+    });
+
+    function LoadData() {
+        $.ajax({
+            "url": "https://localhost:44352/Notification/GetNotificationData",
+            "method": "get",
+            success: function (data) {
+                console.log(data);
+                
+                if (data !=0) {
+                    $.each(data, function (i, item) {
+                        $("#Container").append("<div class='card m-2' style='box-shadow:rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'><div class='card-body'><div class='row'><div class='col-2'><h2> 👤</h2></div><div class='col-8'><h2>" + item.First_Name + " " + item.Last_Name + "</h2></div><div class='col-2 pt-2'><button class='btn btn-success me-1' onclick='Accept(" + item.id + ")'>Accept</button><button class='btn btn-danger' onclick='Delete(" + item.id + ")'>Delete</button></div></div></div></div>")
+                    })
+                }
+                else {
+                  
+                    $("#Container").append("<div><h3 class='text-center text-danger'>No Requested Yet !!!</h3></div><hr /><div><img src='/Images/Profile/chatting.jpg'/></div>")
+                   
+                }
+            },
+            error: function (msg) {
+                Console.log(msg);
+            }
+        })
+    }
+
+    function Accept(id) {
+        $.ajax({
+            "url": "https://localhost:44352/Notification/SaveChatStatus?id="+id,
+            "method": "get",
+            success: function (data) {
+                console.log(data.Message);
+                alert("Request Accepted");
+            },
+            error: function (msg) {
+                console.log(data.Message)
+            }
+
+        })
+    }
+
+    function Delete(id) {
+        alert("this is Delete fun");
+    }
+</script>
+
+<div class="container " id="Container">
+    <h1 class="p-3">Notification</h1>
+
+    @*<div class="card " style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    <h2> 👤</h2>
+                </div>
+                <div class="col-8">
+                    <h2>Utkarsha Nangare</h2>
+                </div>
+
+                <div class="col-2 pt-2">
+                    <button class="btn btn-success" onclick='Accept()'>Accept</button>
+                    <button class="btn btn-danger" onclick='Delete()'>Delete</button>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <hr />*@
+    
+
+</div>
+<hr />
+<div class="container">
+    <div>
+        <img src="~/Images/Profile/chatting.jpg" alt="Alternate Text" />
+    </div>
+</div>
+
