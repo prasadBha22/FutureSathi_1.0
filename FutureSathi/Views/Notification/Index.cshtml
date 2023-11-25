@@ -11,7 +11,7 @@
 
     function LoadData() {
         $.ajax({
-            "url": "https://localhost:44352/Notification/GetNotificationData",
+            "url": "/Notification/GetNotificationData",
             "method": "get",
             success: function (data) {
                 console.log(data);
@@ -35,7 +35,7 @@
 
     function Accept(id) {
         $.ajax({
-            "url": "https://localhost:44352/Notification/SaveChatStatus?id="+id,
+            "url": "/Notification/SaveChatStatus?id="+id,
             "method": "get",
             success: function (data) {
                 console.log(data.Message);
@@ -57,7 +57,7 @@
     <h1 class="p-3">Notification</h1>
 
     @*<div class="card " style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
-        <div class="card-body">
+        <div class="card-body",,>
             <div class="row">
                 <div class="col-2">
                     <h2> 👤</h2>

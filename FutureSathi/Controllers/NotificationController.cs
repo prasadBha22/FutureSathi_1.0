@@ -38,12 +38,12 @@ namespace FutureSathi.Controllers
             return Json(objj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult SaveChatStatus(int id)
+        public ActionResult SaveChatStatus(int id)//jj
         {
             var user = User.Identity.Name;
-            var o = ctx.tblUsers.Select(s => new { s.id, s.Email,s.Contact }).Where(w => w.Email == user).FirstOrDefault();
+            var o = ctx.tblUsers.Select(s => new { s.id, s.Email, s.Contact }).Where(w => w.Email == user).FirstOrDefault();
             int UserId = o.id;
-            var obj = _user.SaveStatusTrue(id,UserId);
+            var obj = _user.SaveStatusTrue(id, UserId);
 
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
