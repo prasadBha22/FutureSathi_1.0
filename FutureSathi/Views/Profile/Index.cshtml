@@ -7,7 +7,7 @@
     var user;
     var smoke;
     var drink;
-    
+
     $(document).ready(function () {
         Getuser();
 
@@ -15,10 +15,29 @@
             $("#myModal").hide();
             $("#myModal2").hide();
             $("#myModal3").hide();
+            $("#myModal4").hide();
+            $("#myModal5").hide();
+            $("#myModal6").hide();
+            $("#myModal7").hide();
         })
-        
+
+        $("#btn-Wish1").click(function () {
+            $("#myModal5").hide();
+            $("#myModal6").show();
+        })
+
+
+        $("#btn-Wish2").click(function () {
+            $("#myModal6").hide();
+            $("#myModal7").show();
+        })
+
+        $("#Wish").click(function () {
+
+            $("#myModal5").show();
+        })
         $("#btn-Personal").click(function () {
-           
+
             if ($("#Religion").val() == null ) {
                 $("#err_religion").html("Please Select  Religion");
                 $("#err_religion").css("color","red")
@@ -37,7 +56,7 @@
                 return;
             }
 
-            
+
 
             if ($("#state").val() == null) {
                 $("#err_state").html("Please Select  State");
@@ -51,8 +70,8 @@
                 return;
             }
 
-           
-           
+
+
 
 
             $("#myModal").hide();
@@ -115,17 +134,17 @@
                 return;
             }
 
+            //ghgjfjfjffjf//
 
 
-           
-            
+
             $("#myModal2").hide();
             $("#myModal3").show();
         })
 
         $("#btn-back2").click(function () {
 
-           
+
 
             $("#myModal2").hide();
             $("#myModal").show();
@@ -140,9 +159,9 @@
 
         $("#state").change(function () {
 
-           
+
             $.ajax({
-                
+
                 "url": "/profile/getCity?id=" + $("#state").val(),
                "method": "get",
                 success: function (response) {
@@ -173,7 +192,7 @@
                 var file = document.getElementById("txtPhoto1").files[i];
                 formData.append("txtPhoto1", file);
             }
-               
+
             $.ajax({
                 type: "POST",
                 url: '/profile/UserPhoto',
@@ -187,13 +206,13 @@
                 error: function (error) {
 
                 }
-                
+
             });
 
         });
 
 
-        
+
 
         $("#btn-submit").click(function () {
 
@@ -217,12 +236,12 @@
             }
 
             if ($("#Family").val() == "") {
-                $("#err_family").html("Please Fill  Bio");
-                $("#err_family").css("color", "red")
+                $("#err_family").html("Please Fill  Family Details");
+                $("#err_family").css("color" , "red")
                 return;
             }
 
-         
+
             if ($("#DrinkIdY").prop("checked", true)) {
                 drink=true
             }
@@ -237,7 +256,7 @@
             else {
                 smoke = false;
             }
-            
+
             user = {
 
                 "First_Name": $("#Fname").val(),
@@ -261,13 +280,13 @@
                 "Complextion_id": $("#Complextion").val(),
                 "Bio": $("#bio").val(),
                 "id": $("#userid").val(),
-                "Family": $("#Family").val(), 
+                "Family": $("#Family").val(),
                 "Smoke_id": smoke,
                 "Drink_id": drink
-                
+
             }
 
-           
+            console.log(user);
             $.ajax({
 
                 "url": "https://localhost:44352/Profile/UpdateUser",
@@ -278,6 +297,9 @@
                     console.log(respo);
                     if (respo==true) {
                         alert("SucessFull")
+                        $("#myModal3").hide();
+                        $("#myModal4").show();
+
                     }
                 },
                 error: function () {
@@ -291,35 +313,49 @@
 
 
 
-        
+
 
 
 
     });
 
     function Getuser() {
-        
+
         $.ajax({
 
             "url": "https://localhost:44352/Profile/GetUser",
             "Method": "get",
             success: function (respo)
             {
-
+                var smoke;
+                var Drink;
                 var user = respo.Message;
                 console.log(user);
                 var wishlist = respo.ReturnMessage;
-                var smoke;
-                var Drink;
+                if (user.Smoke_id) {
+                    smoke = "Yes";
+                }
+                else {
+                    smoke = "No";
+                }
+
+
+                if (user.Drink_id) {
+                    Drink = "Yes";
+                }
+                else {
+                    Drink = "No";
+                }
 
 
 
-                $("#profile").append("<div class='container d-flex justify-content-center'><div class='col-4 pt-3 pb-3 rounded-circle'><div class='d-flex justify-content-center'><img src='/UserPhoto/"+user.Photo_1+"' class='w-50 rounded-circle'></div></div></div> <div class='d-flex justify-content-center '> <a class='btn text-white' style='Background-color:#ff666d' onclick='Edit(" + user.id + ")'>Edit Profile<a/></div>@*about myself*@<div class='container border rounded-4 mb-4 mt-3 p-3'><h3 class='pb-3'>About MySelf</h3><div><h5>" + user.Bio + "</h5></div></div>@*personal details*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Personal Details </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + user.Age + "</td></tr><tr><th>Height</th><td>" + user.Height + "</td><tr><th>Marrital status</th><td>" + user.Marritalstatus + "</td><tr><th>MobileNo</th><td>" + user.Contact + "</td><tr><th>Email</th><td>" + user.Email + "</td></tr><tr><th>Education</th><td>" + user.Education + "</td><tr><th>Profession</th><td>" + user.Profession + "</td></tr><tr><th>Income</th><td>" + user.Income + "</td> </tr><tr><th>Family</th><td>" + user.Family + "</td></tr><tr><th>City</th><td>" + user.City + "</td></tr><tr><th>State</th><td>" + user.State + "</td></tr></tbody></table></div>-@*partnerwishlist*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + wishlist.Agee + "</td></tr><tr><th>Religion</th><td>" + wishlist.Religion + "</td><tr><th>Marrital status</th><td>" + wishlist.Marital_Status + "</td><tr><th>Education</th><td>" + wishlist.Education + "</td><tr><th>Profession</th><td>" + wishlist.Profession + "</td></tr><tr><th>Income</th><td>" + wishlist.Income + "</td><tr><th>Diet</th><td>" + wishlist.Diet + "</td></tr><tr><th>Complextion</th><td>" + wishlist.Comlextion + "</td> </tr><tr><th>Height</th><td>" + wishlist.Height + "</td></tr><tr><th>City</th><td>" + "na" + "</td></tr><tr><th>Body Type</th><td>" + wishlist.Body_Type + "</td></tr><tr><th>State</th><td>" + wishlist.State + "</td></tr></tbody></table></div>@*cards-start*@<div class='container-fluid d-flex flex-wrap justify-content-evenly'> @*card1*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/Food.jpg' class='w-75'></div><h6 style='text-align:center' class='mb-3 mt-3 pt-3'>Food</h6> <div style='display: flex; justify-content: center' class='m-1'><h6>No</h6> </div> </div></div> @*card 2*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in ' data-aos-duration='1000' data-aos-easing='ease -in -out'><div class='card-body'> <div class='d-flex justify-content-center'><img src='/Images/Smoke.jpg' class='w-75'></div> <h6 style='text-align:center' class='mb- 3 mt-3 pt-3'>Smoke Habbit</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-3'>No</h6></div></div></div>@*card 3*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content- center'><img src='/Images/Drink2.jpg' class='w-100'></div><h6 style='text-align: center' class='mb-3 mt- 3'></h6><div style='display: flex; justify-content: center' class='m-1'><h6>No</h6></div></div></div> @*card 4*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/gym2.jpg' class='w-75'></div><h6 style='text-align: center' class='mb-3 mt-3  pt-2'>BodyType</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-4'>No</h6></div></div></div></div> ");
+
+                $("#profile").append("<div class='container d-flex justify-content-center'><div class='col-4 pt-3 pb-3 rounded-2'><div class='d-flex justify-content-center'><img src='/UserPhoto/" + user.Photo_1 + "' class='w-50 rounded-5'></div></div></div><div class='d-flex justify-content-center pt-4 '> <a class='btn text-white ' style='Background-color:#ff666d' onclick='Edit(" + user.id + ")'>Edit Profile<a/></div> @*about myself*@<div class='container border rounded-4 mb-4 mt-3 p-3'><h3 class='pb-3'>About MySelf</h3><div><h5>" + user.Bio + "</h5></div></div>@*personal details*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Personal Details </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + user.Age + "</td></tr><tr><th>Height</th><td>" + user.Height + "</td><tr><th>Marrital status</th><td>" + user.Marritalstatus + "</td><tr><th>MobileNo</th><td>" + user.Contact + "</td><tr><th>Email</th><td>" + user.Email + "</td></tr><tr><th>Education</th><td>" + user.Education + "</td><tr><th>Profession</th><td>" + user.Profession + "</td></tr><tr><th>Income</th><td>" + user.Income + "</td> </tr><tr><th>Family</th><td>" + user.Family + "</td></tr><tr><th>City</th><td>" + user.City + "</td></tr><tr><th>State</th><td>" + user.State + "</td></tr></tbody></table></div>-@*partnerwishlist*@<div class='container  border rounded-4 pt-3 pb-3 mb-3'><h3 class='pb-4 text-center'> Partner WishList </h3><table class='table table-borderless fs-6 '><tbody><tr><th>Age</th><td>" + wishlist.Agee + "</td></tr><tr><th>Religion</th><td>" + wishlist.Religion + "</td><tr><th>Marrital status</th><td>" + wishlist.Marital_Status + "</td><tr><th>Education</th><td>" + wishlist.Education + "</td><tr><th>Profession</th><td>" + wishlist.Profession + "</td></tr><tr><th>Income</th><td>" + wishlist.Income + "</td><tr><th>Diet</th><td>" + wishlist.Diet + "</td></tr><tr><th>Complextion</th><td>" + wishlist.Comlextion + "</td> </tr><tr><th>Height</th><td>" + wishlist.Height + "</td></tr><tr><th>City</th><td>" + "na" + "</td></tr><tr><th>Body Type</th><td>" + wishlist.Body_Type + "</td></tr><tr><th>State</th><td>" + wishlist.State + "</td></tr></tbody></table></div>@*cards-start*@<div class='container-fluid d-flex flex-wrap justify-content-evenly'> @*card1*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/Food.jpg' class='w-75'></div><h6 style='text-align:center' class='mb-3 mt-3 pt-3'>Diet</h6> <div style='display: flex; justify-content: center' class='m-1'><h6>"+user.Diet+"</h6> </div> </div></div> @*card 2*@<div class='card mb-4 rounded-4' style='max-width: 18rem; ' data-aos='zoom-in ' data-aos-duration='1000' data-aos-easing='ease -in -out'><div class='card-body'> <div class='d-flex justify-content-center'><img src='/Images/Smoke.jpg' class='w-75'></div> <h6 style='text-align:center' class='mb- 3 mt-3 pt-3'>Smoke Habbit</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-3'>"+smoke+"</h6></div></div></div>@*card 3*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content- center'><img src='/Images/Drink2.jpg' class='w-100'></div><h6 style='text-align: center' class='mb-3 mt- 3'></h6><div style='display: flex; justify-content: center' class='m-1'><h6>"+Drink+"</h6></div></div></div> @*card 4*@<div class='card mb-4 rounded-4' style='max-width: 18rem;' data-aos='zoom-in' data-aos-duration='1000' data-aos-easing='ease-in-out'><div class='card-body'><div class='d-flex justify-content-center'><img src='/Images/gym2.jpg' class='w-75'></div><h6 style='text-align: center' class='mb-3 mt-3  pt-2'>BodyType</h6><div style='display: flex; justify-content: center' class='m-1'><h6 class='pt-4'>"+user.body+"</h6></div></div></div></div> ");
 
 
             },
             error: function (er) {
-                
+
             }
 
 
@@ -333,7 +369,7 @@
 
 
     function Edit(Id) {
-      
+
         var smoke;
         var drink;
         $.ajax({
@@ -343,7 +379,8 @@
             success: function (obj) {
                 respo = obj.ReturnMessage;
                 console.log(respo.Smoke_id);
-               
+                console.log(respo.Drink_id);
+
                 $("#myModal").show();
 
 
@@ -469,9 +506,9 @@
                     );
                 });
 
-               
+
                 $.each(obj.DietDrop, function (i, item) {
-                   
+
                     $("#Diet").append(
 
                         '<option value=' + item.Value + '>' + item.Text + '</option>'
@@ -485,7 +522,7 @@
 
 
 
-               
+
 
                 $("#Fname").val(respo.First_Name);
                 $("#Lname").val(respo.Last_Name);
@@ -493,7 +530,7 @@
                 $("#contact").val(respo.Contact);
                 $("#Bodytype").val(respo.body);
                  $("#Gender").val(respo.Gender);
-       
+
                /* $("#dateofbirth").val(respo.DOB);*/
                 $("#state").val(respo.State);
                 $("#city").val(respo.City);
@@ -504,27 +541,22 @@
                 $("#Income").val(respo.Income);
                 $("#userid").val(respo.id);
                 $("#Diet").val(respo.Diet);
-               /* console.log(respo.Id);*/
-              
                 $("#Height").val(respo.Height);
-               
                 $("#LookingF").val(respo.LookingFor);
-
-
                 $("#bio").val(respo.Bio);
+                $("#Family").val(respo.Family);
                 $("#Profession").val(respo.Profession);
                 $("#Complextion").val(respo.Complextion);
-              //  $("#txtPhoto1").val(respo.Photo_1);
-              
+
                 $("#MarritalS").val(respo.Marital_Status_id);
 
 
 
-                debugger;
-                console.log(respo.Smoke_id);
+
+
                 if (respo.Smoke_id == true) {
-                    
-                     $("#SmokeIdY").prop("checked",true);
+
+                    $("#SmokeIdY").va;("checked",true);
                     /* $("#SmokeIdY").("checked",true);*/
                 }
                 if (respo.Smoke_id == false) {
@@ -532,14 +564,11 @@
                     $("#SmokeIdN").prop("checked", true);
                     /* $("#SmokeIdY").("checked",true);*/
                 }
-               
-                else {
-                    $("#SmokeIdY").prop("checked", false);
-                    $("#SmokeIdN").prop("checked", false);
-                }
 
 
-               
+
+
+
                 if (respo.Drink_id==true) {
                     $("#DrinkIdY").prop("checked",true);
                 }
@@ -547,29 +576,6 @@
                 if (respo.Drink_id == false) {
                     $("#DrinkIdN").prop("checked", true);
                 }
-
-               
-                else {
-                    $("#DrinkIdN").prop("checked", false);
-                    $("#DrinkIdY").prop("checked", false);
-                }
-
-
-                   
-              
-
-              
-               
-               
-            
-
-               
-
-
-
-
-
-
 
 
 
@@ -603,8 +609,9 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">
-                            Personal Information</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            Personal Information
+                        </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
@@ -642,8 +649,8 @@
                                 <div class="col-md-10">
 
                                     <select class="form-select" id="Gender" name="Gender">
-                                       
-                                     <option value="">Not set</option>
+
+                                        <option value="">Not set</option>
 
 
                                     </select>
@@ -704,11 +711,10 @@
                             <div class="col-4 mb-2">
 
                                 <label class="form-label col md-2"> Religion:</label>
-                                
+
                                 <div class="col-md-10">
 
                                     <select class="form-select" id="Religion" name="Religion">
-                                        
                                     </select>
                                     <span id="err_religion"></span>
                                 </div>
@@ -816,7 +822,7 @@
                                     <select class="form-select" id="Education" name="Education">
                                         <option value="null">Not set</option>
                                     </select>
-                                   <span id="err_education"></span>
+                                    <span id="err_education"></span>
                                 </div>
                             </div>
 
@@ -851,7 +857,6 @@
                                 <div class="col-md-10">
 
                                     <select class="form-select" id="LookingF">
-                                        
                                     </select>
                                     <span id="err_looking"></span>
                                 </div>
@@ -1024,21 +1029,280 @@
                                     <span id="err_family"></span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-10 d-none">
+                        <input type="text" id="userid" class="form-control" name="userid" />
+
+                    </div>
+
+
+
+                    <div class="d-flex justify-content-center">
+                        <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-submit">Submit</a>
+
+
+                    </div>
+
+                    <div class="d-flex justify-content-center pt-3">
+                        <a class="btn btn-dark  " style="color:white  " id="btn-back3">Back</a>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+<div class="modal" id="myModal4" style="margin-top:200px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Status</h4>
+                <button type="button" class="btn-close" id="sucessbtn" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div>
+                    <h5 class="text-success">Updated SucessFully</h5>
+                    <h6>
+                        You Have Completed Your Profile Please Click To Add Wish List To Enter WishList
+                        If You Aleredy have cpmplete It Please Close
+                    </h6>
+                </div>
+                <div class="d-flex justify-content-center pt-5 pb-5">
+                    <a class="btn " style="color: white;background-color: #ff666d " id="Wish">Add WishList</a>
+                </div>
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container mt-4">
+    <form id="userForm3">
+        <!-- The Modal -->
+        <div class="modal" id="myModal5" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">WishList</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
+
+
+
+
+                        @*Additional Inform*@
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+
+
+
+                            @*<div class="col-6 mb-2 p-2">
+
+                                    <label class="form-label col md-2"> Education :</label>
+
+                                    <div class="col-md-10">
+
+                                        <select class="form-select" id="Education" name="Education">
+                                            <option value="null">Not set</option>
+                                        </select>
+                                        <span id="err_education"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mb-2 p-2">
+
+                                    <label class="form-label col md-2"> Profession :</label>
+
+                                    <div class="col-md-10">
+
+                                        <select class="form-select" id="Profession" name="Profession">
+                                        </select>
+                                        <span id="err_profession"></span>
+                                    </div>
+                                </div>*@
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Income :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Income" name="Income">
+                                    </select>
+                                    <span id="err_income"></span>
+                                </div>
                             </div>
+
+                            <div class="col-6 mb-2 p-2">
+                                <label class="form-label col md-2"> Age:</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="age" name="age">
+                                    </select>
+                                    <span id="err_age"></span>
+                                </div>
+
+                            </div>
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Height :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Height" name="Height">
+                                    </select>
+                                    <span id="err_height"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> BodyType :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Bodytype" name="Bodytype">
+                                    </select>
+                                    <span id="err_bodytype"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Diet :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Diet" name="Diet">
+                                    </select>
+                                    <span id="err_diet"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Complextion :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Complextion" name="Complextion">
+                                    </select>
+                                    <span id="err_complextion"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Smoke Habbit :</label>
+
+                                <div class="col-md-12">
+
+                                    <input type="radio" id="SmokeY" class="ps-3" name="Smoke" /> Yes
+
+                                    <input type="radio" id="SmokeN" class="ps-3" name="Smoke" /> no
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Drink Habbit :</label>
+
+                                <div class="col-md-12">
+
+                                    <input type="radio" id="DrinkY" class="ps-3" name="Drink" /> Yes
+
+                                    <input type="radio" id="DrinkN" class="ps-3" name="Drink" /> no
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Marital Status :</label>
+
+                                <div class="col-md-12">
+
+                                    <input type="checkbox" id="MarSingle" class="ps-3 " name="maritalState" /> Single
+
+                                    <input type="checkbox" id="MarDivorced" class="ps-3" name="maritalState" /> Divorced
+
+
+                                    <input type="checkbox" id="MarWidow" class="ps-3" name="maritalState" /> Widowed
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="col-md-10 d-none">
+                                <input type="text" id="userid" class="form-control" name="userid" />
+
+                            </div>
+
+
+
+
+
+
+
                         </div>
-
-                      
-
-
-                        <div class="col-md-10 d-none">
-                            <input type="text" id="userid" class="form-control" name="userid"  />
-
-                        </div>
-
 
 
                         <div class="d-flex justify-content-center">
-                            <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-submit">Submit</a>
+                            <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-Wish1">Next</a>
 
 
                         </div>
@@ -1048,27 +1312,319 @@
 
 
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-@*<label>First Name </label>
-    <input type="text" id="Fname" name="Fname" />
-
-
-    <label>First Name </label>
-    <input type="text" id="Fname" name="Fname" />*@
 
 
 
 
+<div class="container mt-4">
+    <form id="userForm3">
+        <!-- The Modal -->
+        <div class="modal" id="myModal6" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Additional Information</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
 
 
 
 
+                        @*Additional Inform*@
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Education :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Education" name="Education">
+                                        <option value="null">Not set</option>
+                                    </select>
+                                    <span id="err_education"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Profession :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Profession" name="Profession">
+                                    </select>
+                                    <span id="err_profession"></span>
+                                </div>
+                            </div>
+
+                           
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 1 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Income" name="Income">
+                                    </select>
+                                    <span id="err_income"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 1 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="LookingF">
+                                    </select>
+                                    <span id="err_looking"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 2 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Height" name="Height">
+                                    </select>
+                                    <span id="err_height"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 2 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Bodytype" name="Bodytype">
+                                    </select>
+                                    <span id="err_bodytype"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 3 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Diet" name="Diet">
+                                    </select>
+                                    <span id="err_diet"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 3  :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="Complextion" name="Complextion">
+                                    </select>
+                                    <span id="err_complextion"></span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <!-- Modal footer -->
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-center">
+                            <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-Wish2">Next</a>
+
+
+                        </div>
+
+                        <div class="d-flex justify-content-center pt-3">
+                            <a class="btn btn-dark  " style="color:white  " id="btn-back3">Back</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="container mt-4">
+    <form id="userForm3">
+        <!-- The Modal -->
+        <div class="modal" id="myModal7" style="--bs-modal-width: 300rem;">
+            <div class="modal-dialog" style="width:115vh">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Additional Information</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body mb-3" id="ModelBody">
+
+
+
+
+                        @*Additional Inform*@
+
+                        <div class=" row mt-4 mb-4 ms-2 me-2 p-3 rounded-4 rounded-bottom-4 " style="background-color: rgb(255, 229, 217)">
+
+
+
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> State :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishState" name="state">
+                                        <option value="null">Not set</option>
+                                    </select>
+                                    <span id="err_wishstate"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Religion :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishReligion" name="Religion">
+                                    </select>
+                                    <span id="err_wishreligion"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 1 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishcity1" name="city">
+                                    </select>
+                                    <span id="err_wishcity1"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 1 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishreligion1">
+                                    </select>
+                                    <span id="err_wishreligion1"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2">  Choice 2 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishcity2" name="city2">
+                                    </select>
+                                    <span id="err_wishcity2"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 2 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishreligion2" name="Religion">
+                                    </select>
+                                    <span id="err_wishreligion2"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 3  :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishcity3" name="city">
+                                    </select>
+                                    <span id="err_wishcity3"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2 p-2">
+
+                                <label class="form-label col md-2"> Choice 3 :</label>
+
+                                <div class="col-md-10">
+
+                                    <select class="form-select" id="wishreligion3" name="Religion">
+                                    </select>
+                                    <span id="err_wishreligion3"></span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <!-- Modal footer -->
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-center">
+                            <a class="btn w-25  " style="color: white;background-color: #ff666d " id="btn-Wish1">Next</a>
+
+
+                        </div>
+
+                        <div class="d-flex justify-content-center pt-3">
+                            <a class="btn btn-dark  " style="color:white  " id="btn-back3">Back</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
