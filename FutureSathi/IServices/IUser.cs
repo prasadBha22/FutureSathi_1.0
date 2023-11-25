@@ -18,16 +18,24 @@ namespace FutureSathi.IServices
 
         dynamic GetPartialUserByGender(string s);  //--->Prasad Bhalerao_20-11-2023 13.30.00
 
-        dynamic GetAllUserInfoandWishlist(int id); //Get two object with this api
-
-        dynamic SaveNotification(int Sid,int Rid); //Get SaveNotification
-
-        dynamic GetNotificationData(int id);
-
         dynamic GetAllUserInfo(string Name);
 
 
-        dynamic SaveStatusTrue(int id,int o);
+        dynamic EditProfile(int id);
+
+        dynamic UpdateUser(UserClass obj);
+
+        dynamic getCity(int id);
+
+
+        dynamic GetAllUserInfoandWishlist(int id); //Get two object with this api
+
+        dynamic SaveNotification(int Sid, int Rid); //Get vnnSaveNotification
+
+        dynamic GetNotificationData(int id);
+
+
+        dynamic SaveStatusTrue(int id, int o);
 
     }
 
