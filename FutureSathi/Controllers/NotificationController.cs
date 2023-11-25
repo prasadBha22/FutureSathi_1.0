@@ -41,7 +41,7 @@ namespace FutureSathi.Controllers
         public ActionResult SaveChatStatus(int id)
         {
             var user = User.Identity.Name;
-            var o = ctx.tblUsers.Select(s => new { s.id, s.Email }).Where(w => w.Email == user).FirstOrDefault();
+            var o = ctx.tblUsers.Select(s => new { s.id, s.Email,s.Contact }).Where(w => w.Email == user).FirstOrDefault();
             int UserId = o.id;
             var obj = _user.SaveStatusTrue(id,UserId);
 
