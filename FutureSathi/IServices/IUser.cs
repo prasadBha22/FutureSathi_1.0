@@ -20,7 +20,7 @@ namespace FutureSathi.IServices
 
         dynamic GetAllUserInfoandWishlist(int id); //Get two object with this api
 
-        dynamic SaveNotification(int Sid,int Rid);
+        dynamic SaveNotification(int Sid,int Rid); //Get SaveNotification
 
         dynamic GetNotificationData(int id);
 
